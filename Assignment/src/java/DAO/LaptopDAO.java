@@ -79,7 +79,7 @@ public class LaptopDAO {
 
             con = DBHelper.makeConnection();
             if (con != null){
-                String sql = "";
+                String sql = "a";
                 
                 while (rs.next()){
                     
