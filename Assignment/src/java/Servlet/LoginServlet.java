@@ -29,7 +29,7 @@ public class LoginServlet extends HttpServlet {
     private final String LOGIN_SUCCESS = "";
     private final String LOGIN_PAGE = "Login.jsp";
     private final String LOGIN_USER_SUCCESS = "/WEB-INF/usersearch.jsp";
-    private final String LOGIN_FAIL = "/WEB-INF/Error.jsp";
+    private final String LOGIN_FAIL = "/WEB-INF/error.jsp";
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
      * methods.
@@ -56,8 +56,9 @@ public class LoginServlet extends HttpServlet {
                 url = LOGIN_SUCCESS;
             }
             else {
-                request.setAttribute("ErrorLogin", "Invalid Username or Password");
+                request.setAttribute("ErrorLogin", "Invalid username or Password");
                 url = LOGIN_PAGE;
+                
             }
         }
         catch (SQLException ex) {
@@ -67,7 +68,7 @@ public class LoginServlet extends HttpServlet {
             log ("LoginServlet's exception: " + ex.getMessage());
         }        
         finally{
-            System.out.println("login: " + url);
+            
             request.getRequestDispatcher(url).forward(request, response);
             out.close();
         }

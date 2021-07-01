@@ -18,6 +18,7 @@
         <form action="LoginServlet" method="POST">
             <font color="red">
                 ${requestScope.ErrorLogin}
+                ${requestScope.NotLogin}
             </font>        
             <table>
                 <tr>
