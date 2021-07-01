@@ -27,9 +27,9 @@ import javax.servlet.http.HttpSession;
 @WebServlet(name = "LoginServlet", urlPatterns = {"/LoginServlet"})
 public class LoginServlet extends HttpServlet {
     private final String LOGIN_SUCCESS = "";
-    private final String LOGIN_PAGE = "login.jsp";
+    private final String LOGIN_PAGE = "Login.jsp";
     private final String LOGIN_USER_SUCCESS = "/WEB-INF/usersearch.jsp";
-    private final String LOGIN_FAIL = "/WEB-INF/error.jsp";
+    private final String LOGIN_FAIL = "/WEB-INF/Error.jsp";
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
      * methods.
@@ -50,6 +50,7 @@ public class LoginServlet extends HttpServlet {
             UserDAO dao = new UserDAO();
             HttpSession session = request.getSession();
             UserDTO dto = dao.getdto(username, password);
+            
             if (dto != null){
                 session.setAttribute("USER", dto);
                 url = LOGIN_SUCCESS;
@@ -60,11 +61,13 @@ public class LoginServlet extends HttpServlet {
             }
         }
         catch (SQLException ex) {
+            ex.printStackTrace();
             log ("LoginServlet's exception: " + ex.getMessage());
         } catch (NamingException ex) {
             log ("LoginServlet's exception: " + ex.getMessage());
         }        
         finally{
+            System.out.println("login: " + url);
             request.getRequestDispatcher(url).forward(request, response);
             out.close();
         }

@@ -27,9 +27,9 @@ public class FilterMainController implements Filter {
     
     private static final String LOGIN_PAGE = "Login.jsp";
     private static final String ERROR_ROLE = "ErrorRole.jsp";
-    private static final String USER_DEFAULT = "USerListServlet.jsp";
-    private static final String EMPLOYEE_DEFAULT = "EmployeeListServlet.jsp";
-    private static final String ADMIN_DEFAULT = "AdminListServlet.jsp";
+    private static final String USER_DEFAULT = "USerListServlet";
+    private static final String EMPLOYEE_DEFAULT = "EmployeeListServlet";
+    private static final String ADMIN_DEFAULT = "AdminListServlet";
     
     private static final boolean debug = true;
 
@@ -132,7 +132,7 @@ public class FilterMainController implements Filter {
             } else {
                 if (user.getRole() == 0) { // 
 
-                    if (resource.length() == 0) {
+                    if (resource.length() == 0 || resource.startsWith("Login")) {
                         url = USER_DEFAULT;
                     } else if (!resource.startsWith("User")) {
                         url = ERROR_ROLE;
@@ -140,7 +140,7 @@ public class FilterMainController implements Filter {
 
                 } else if (user.getRole() == 1) { // 
 
-                    if (resource.length() == 0) {
+                    if (resource.length() == 0 || resource.startsWith("Login")) {
                         url = EMPLOYEE_DEFAULT;
                     } else if (!resource.startsWith("Employee")) {
                         url = ERROR_ROLE;
@@ -148,7 +148,7 @@ public class FilterMainController implements Filter {
 
                 } else if (user.getRole() == 2) { // 
 
-                    if (resource.length() == 0) {
+                    if (resource.length() == 0 || resource.startsWith("Login")) {
                         url = ADMIN_DEFAULT;
                     } else if (!resource.startsWith("Admin")) {
                         url = ERROR_ROLE;
