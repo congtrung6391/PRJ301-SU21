@@ -5,31 +5,19 @@
  */
 package Servlet;
 
-import DAO.UserDAO;
-import DTO.UserDTO;
 import java.io.IOException;
 import java.io.PrintWriter;
-import java.sql.SQLException;
-import java.util.logging.Level;
-import java.util.logging.Logger;
-import javax.naming.NamingException;
 import javax.servlet.ServletException;
-import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import javax.servlet.http.HttpSession;
 
 /**
  *
- * @author khang
+ * @author congt
  */
-@WebServlet(name = "LoginServlet", urlPatterns = {"/LoginServlet"})
-public class LoginServlet extends HttpServlet {
-    private final String LOGIN_SUCCESS = "";
-    private final String LOGIN_PAGE = "login.jsp";
-    private final String LOGIN_USER_SUCCESS = "/WEB-INF/usersearch.jsp";
-    private final String LOGIN_FAIL = "/WEB-INF/error.jsp";
+public class AdminListServlet extends HttpServlet {
+
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
      * methods.
@@ -42,31 +30,17 @@ public class LoginServlet extends HttpServlet {
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
-        PrintWriter out = response.getWriter();
-        String url = LOGIN_FAIL;
-        try {
-            String username = request.getParameter("txtusername");
-            String password = request.getParameter("txtpassword");
-            UserDAO dao = new UserDAO();
-            HttpSession session = request.getSession();
-            UserDTO dto = dao.getdto(username, password);
-            if (dto != null){
-                session.setAttribute("USER", dto);
-                url = LOGIN_SUCCESS;
-            }
-            else {
-                request.setAttribute("ErrorLogin", "Invalid Username or Password");
-                url = LOGIN_PAGE;
-            }
-        }
-        catch (SQLException ex) {
-            log ("LoginServlet's exception: " + ex.getMessage());
-        } catch (NamingException ex) {
-            log ("LoginServlet's exception: " + ex.getMessage());
-        }        
-        finally{
-            request.getRequestDispatcher(url).forward(request, response);
-            out.close();
+        try (PrintWriter out = response.getWriter()) {
+            /* TODO output your page here. You may use following sample code. */
+            out.println("<!DOCTYPE html>");
+            out.println("<html>");
+            out.println("<head>");
+            out.println("<title>Servlet AdminListServlet</title>");            
+            out.println("</head>");
+            out.println("<body>");
+            out.println("<h1>Servlet AdminListServlet at " + request.getContextPath() + "</h1>");
+            out.println("</body>");
+            out.println("</html>");
         }
     }
 

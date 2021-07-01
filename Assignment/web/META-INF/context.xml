@@ -3,7 +3,7 @@
 <Resource name="DBContext" 
               auth="Container" 
               type="javax.sql.DataSource" 
-              username="sa" password="2582000" 
+              username="trungtnc" password="a" 
               driverClassName="com.microsoft.sqlserver.jdbc.SQLServerDriver"
               url="jdbc:sqlserver://localhost:1433;databaseName=PRJ301_SE1511_Group01" />
 </Context>
