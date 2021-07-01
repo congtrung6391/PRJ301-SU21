@@ -1,7 +1,7 @@
 <%-- 
-    Document   : error
-    Created on : Jun 28, 2021, 1:43:39 PM
-    Author     : khang
+    Document   : ErrorRole
+    Created on : Jul 1, 2021, 11:17:50 AM
+    Author     : congt
 --%>
 
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
@@ -12,6 +12,6 @@
         <title>JSP Page</title>
     </head>
     <body>
-        <h1>error</h1>
+        <h1>Sorry, you do not have access to this page.</h1>
     </body>
 </html>

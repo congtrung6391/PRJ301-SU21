@@ -15,7 +15,7 @@
     <body>
         
         <h1>Login Page</h1>
-        <form action="DispatchServlet" method="POST">
+        <form action="LoginServlet" method="POST">
             <font color="red">
                 ${requestScope.ErrorLogin}
             </font>        
