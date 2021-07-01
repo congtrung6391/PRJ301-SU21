@@ -132,7 +132,7 @@ public class FilterMainController implements Filter {
                 }
 
             } else {
-                if (user.getRole() == 0) { // 
+                if (user.getRole() == 1) { // 
 
                     if (resource.length() > 0) {
                         url = USER_DEFAULT;
@@ -140,7 +140,7 @@ public class FilterMainController implements Filter {
                         url = ERROR_ROLE;
                     }
 
-                } else if (user.getRole() == 1) { // 
+                } else if (user.getRole() == 2) { // 
 
                     if (resource.length() == 0) {
                         url = EMPLOYEE_DEFAULT;
@@ -148,7 +148,7 @@ public class FilterMainController implements Filter {
                         url = ERROR_ROLE;
                     }
 
-                } else if (user.getRole() == 2) { // 
+                } else if (user.getRole() == 3) { // 
 
                     if (resource.length() == 0) {
                         url = ADMIN_DEFAULT;
