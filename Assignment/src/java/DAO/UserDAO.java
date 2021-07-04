@@ -26,9 +26,9 @@ public class UserDAO {
         try {
             con = DBHelper.makeConnection();
             if (con != null){
-                String sql = "select UserID ,Username, Password,Name, Role,Phone, Address  "
+                String sql = "select UserID ,Username, Password, Name, Role,Phone, Address  "
                         + "from Users "
-                        + "where Username = ? and Password = ?";
+                        + "where UserID = ? and Password = ?";
                 ps = con.prepareStatement(sql);
                 ps.setString(1, username);
                 ps.setString(2, password);
@@ -59,6 +59,47 @@ public class UserDAO {
         }
         return null;
     }
+    
+    public UserDTO getUserById (int userId) throws SQLException, NamingException{
+        Connection con = null ;
+        PreparedStatement ps = null;
+        ResultSet rs = null ;
+        try {
+            con = DBHelper.makeConnection();
+            if (con != null){
+                String sql = "select UserID ,Username, Password, Name, Role,Phone, Address  "
+                        + "from Users "
+                        + "where UserID = ?";
+                ps = con.prepareStatement(sql);
+                ps.setInt(1, userId);
+                rs = ps.executeQuery();
+                if (rs.next()){
+                    int id = rs.getInt("UserID");
+                    String usernamelogin = rs.getString("Username");
+                    String passwordlogin = rs.getString("Password");
+                    int role = rs.getInt("Role");
+                    String name = rs.getString("Name");
+                    String phone = rs.getString("Phone");
+                    String address = rs.getString("Address");
+                    UserDTO dto = new UserDTO(id, usernamelogin, passwordlogin, role, name, phone, address);
+                    return dto ;
+                }
+            }
+        } 
+        finally{
+            if (rs != null){
+                rs.close();
+            }
+            if (ps != null){
+                ps.close();
+            }
+            if (con != null){
+                con.close();
+            }
+        }
+        return null;
+    }
+    
     public ArrayList<UserDTO> SearchAllUser () throws NamingException, SQLException {
         Connection con = null ;
         PreparedStatement ps = null;
@@ -68,7 +109,7 @@ public class UserDAO {
 
             con = DBHelper.makeConnection();
             if (con != null){
-                String sql = "select UserID,Username,Password,Role,Name,Phone,Address from Users "
+                String sql = "select UserID,Username,Password,Role,Name,Phone,Address "
                         + "from Users ";
                 ps = con.prepareStatement(sql);
                 rs = ps.executeQuery();
@@ -109,12 +150,12 @@ public class UserDAO {
 
             con = DBHelper.makeConnection();
             if (con != null){
-                String sql = "select UserID,Username,Password,Role,Name,Phone,Address from Users "
+                String sql = "select UserID,Username,Password,Role,Name,Phone,Address "
                         + "from Users "
                         + "where Username like ? and Name like ? ";
                 ps = con.prepareStatement(sql);
-                ps.setString(1, "%"+name + "%");
-                ps.setString(2, "%"+fullName+"%");
+                ps.setString(1, "%" + name + "%");
+                ps.setString(2, "%" + fullName+"%");
                 rs = ps.executeQuery();
                 userlist = new ArrayList();
                 while (rs.next()){

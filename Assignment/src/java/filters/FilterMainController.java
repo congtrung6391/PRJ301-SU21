@@ -115,22 +115,23 @@ public class FilterMainController implements Filter {
         int lastIndex = uri.lastIndexOf("/");
         String resource = uri.substring(lastIndex+1);
         
-        System.out.println("resource: " + resource);
-        System.out.println("role :" + user.getRole());
+        
         String url = null;
         
         if (!resource.startsWith("Error")) {
   
             if (user == null) {
-
                 if (resource.length() > 0 && !resource.startsWith("Login")) {
+                    request.setAttribute("NotLogin", "You have to Login first");
                     url = LOGIN_PAGE;
                 } else if (resource.length() == 0) {
+                    
                     url = LOGIN_PAGE;
                 }
+                
 
             } else {
-                if (user.getRole() == 0) { // 
+                if (user.getRole() == 3) { // 
 
                     if (resource.length() == 0 || resource.startsWith("Login")) {
                         url = USER_DEFAULT;
@@ -138,27 +139,30 @@ public class FilterMainController implements Filter {
                         url = ERROR_ROLE;
                     }
 
-                } else if (user.getRole() == 1) { // 
-
+                } else if (user.getRole() == 2) { // 
                     if (resource.length() == 0 || resource.startsWith("Login")) {
                         url = EMPLOYEE_DEFAULT;
                     } else if (!resource.startsWith("Employee")) {
                         url = ERROR_ROLE;
                     }
 
-                } else if (user.getRole() == 2) { // 
-
-                    if (resource.length() == 0 || resource.startsWith("Login")) {
+                } else if (user.getRole() == 1) { 
+                    
+                    if (resource.length() == 0 || resource.startsWith("Login")) {                       
                         url = ADMIN_DEFAULT;
+                        System.out.println(url);
+                    }
                     } else if (!resource.startsWith("Admin")) {
+                        
                         url = ERROR_ROLE;
+                        System.out.println(url);
                     }
                 }
             }
-        }
         
-        System.out.println("url: " + url);
+        
 
+        
         if (url == null) {
             chain.doFilter(request, response);
         } else {
