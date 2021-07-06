@@ -99,4 +99,94 @@ public class LaptopDAO {
         }
         return false;
     }
+    public LaptopDTO getLaptopById (int id) throws NamingException, SQLException{
+        Connection con = null ;
+        PreparedStatement ps = null;
+        ResultSet rs = null ;
+        try {
+            con = DBHelper.makeConnection();
+            if (con != null){
+                String sql = "select LaptopID,Price,Name,CPU,Ram,Screen,Graphic,Disk,OS,Weight,Region,Year "
+                        + "from Laptop "
+                        + "where LaptopID = ?";
+                ps = con.prepareStatement(sql);
+                ps.setInt(1, id);
+                rs = ps.executeQuery();
+                
+                if (rs.next()){
+                    float price = rs.getFloat("Price");
+                    String name = rs.getString("Name");
+                    String CPU = rs.getString("CPU");
+                    String Ram = rs.getString("Ram");
+                    String Screen = rs.getString("Screen");
+                    String Graphic = rs.getString("Graphic");
+                    String Disk = rs.getString("Disk");
+                    String OS = rs.getString("OS");
+                    float weight = rs.getFloat("Weight");
+                    String region = rs.getString("Region");
+                    int year = rs.getInt("Year");
+                    LaptopDTO dto = new LaptopDTO(id, name, price, CPU, Ram, Screen, Graphic, Disk, OS, weight, region, year);
+                    return dto;
+                }
+            }
+        } 
+        finally{
+            if (rs != null){
+                rs.close();
+            }
+            if (ps != null){
+                ps.close();
+            }
+            if (con != null){
+                con.close();
+            }
+        }
+        return null;
+    }
+    public ArrayList<LaptopDTO> getAllLaptop () throws NamingException, SQLException{
+        Connection con = null ;
+        PreparedStatement ps = null;
+        ResultSet rs = null ;
+        ArrayList<LaptopDTO> lapList = null;
+        try {
+            con = DBHelper.makeConnection();
+            if (con != null){
+                String sql = "select LaptopID,Price,Name,CPU,Ram,Screen,Graphic,Disk,OS,Weight,Region,Year "
+                        + "from Laptop ";
+                        
+                ps = con.prepareStatement(sql);
+                rs = ps.executeQuery();
+                lapList = new ArrayList<>();
+                while (rs.next()){
+                    int id = rs.getInt("LaptopID");
+                    float price = rs.getFloat("Price");
+                    String name = rs.getString("Name");
+                    String CPU = rs.getString("CPU");
+                    String Ram = rs.getString("Ram");
+                    String Screen = rs.getString("Screen");
+                    String Graphic = rs.getString("Graphic");
+                    String Disk = rs.getString("Disk");
+                    String OS = rs.getString("OS");
+                    float weight = rs.getFloat("Weight");
+                    String region = rs.getString("Region");
+                    int year = rs.getInt("Year");
+                    LaptopDTO dto = new LaptopDTO(id, name, price, CPU, Ram, Screen, Graphic, Disk, OS, weight, region, year);
+                    lapList.add(dto);
+                }
+                return lapList;
+            }
+        } 
+        finally{
+            if (rs != null){
+                rs.close();
+            }
+            if (ps != null){
+                ps.close();
+            }
+            if (con != null){
+                con.close();
+            }
+        }
+        return null;
+    }
 }

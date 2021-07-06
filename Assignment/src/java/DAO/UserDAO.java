@@ -28,7 +28,7 @@ public class UserDAO {
             if (con != null){
                 String sql = "select UserID ,Username, Password, Name, Role,Phone, Address  "
                         + "from Users "
-                        + "where UserID = ? and Password = ?";
+                        + "where Username = ? and Password = ?";
                 ps = con.prepareStatement(sql);
                 ps.setString(1, username);
                 ps.setString(2, password);
