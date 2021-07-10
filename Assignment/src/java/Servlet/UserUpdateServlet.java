@@ -74,6 +74,7 @@ public class UserUpdateServlet extends HttpServlet {
             }
             if (!phone.matches("[0-9]{10}")){
                 valid = false;
+                System.out.println(phone);
                 error.setPhoneError("Phone must contain 10 digits");
             }
             if (address.trim().isEmpty()){
@@ -91,7 +92,9 @@ public class UserUpdateServlet extends HttpServlet {
                 }
             }
             else {
+                request.setAttribute("Fail", "Update Fail");
                 request.setAttribute("Error", error);
+                url = SUCCESS;
             }
             url = SUCCESS;
         }
