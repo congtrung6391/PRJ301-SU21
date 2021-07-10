@@ -5,8 +5,15 @@
  */
 package Servlet;
 
+import DAO.UserDAO;
+import DTO.UserDTO;
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import javax.naming.NamingException;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
@@ -17,7 +24,10 @@ import javax.servlet.http.HttpServletResponse;
  * @author congt
  */
 public class AdminListServlet extends HttpServlet {
-
+    
+    private static final String SUCCESS = "WEB-INF/jsp/AdminList.jsp";
+    private static final String FAILED = "Error.jsp";
+    
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
      * methods.
@@ -30,17 +40,35 @@ public class AdminListServlet extends HttpServlet {
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
-        try (PrintWriter out = response.getWriter()) {
-            /* TODO output your page here. You may use following sample code. */
-            out.println("<!DOCTYPE html>");
-            out.println("<html>");
-            out.println("<head>");
-            out.println("<title>Servlet AdminListServlet</title>");            
-            out.println("</head>");
-            out.println("<body>");
-            out.println("<h1>Servlet AdminListServlet at " + request.getContextPath() + "</h1>");
-            out.println("</body>");
-            out.println("</html>");
+        
+        String url = FAILED;
+        
+        String username = request.getParameter("admin-search-username");
+        String fullname = request.getParameter("admin-search-fullname");
+        
+        if (username == null) username = "";
+        if(fullname == null) fullname = "";
+        
+        request.getRequestURI();
+        
+        try {
+            
+            UserDAO userDao = new UserDAO();
+            
+            ArrayList<UserDTO> userList = userDao.SearchAllUser(username, fullname);
+            
+            request.setAttribute("userList", userList);
+            
+            url = SUCCESS;
+            
+        } catch (NamingException ex) {
+            Logger.getLogger(AdminListServlet.class.getName()).log(Level.SEVERE, null, ex);
+            url = FAILED;
+        } catch (SQLException ex) {
+            Logger.getLogger(AdminListServlet.class.getName()).log(Level.SEVERE, null, ex);
+            url = FAILED;
+        } finally {
+            request.getRequestDispatcher(url).forward(request, response);
         }
     }
 
