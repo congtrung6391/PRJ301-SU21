@@ -17,6 +17,14 @@
 
         <div class="p-2">
                 <ul class="nav justify-content-between list-unstyled">
+                    <c:if test="${USER eq null}">
+                        <li>
+                            <a class="nav-link admin-link font-weight-bold" href="/Login">Login</a>
+                        </li>
+                        <li>
+                            <a class="nav-link admin-link font-weight-bold" href="/SignUp">Register</a>
+                        </li>
+                    </c:if>
                     <c:if test="${USER.getRole() eq 1}">
                         <!-- Admin -->
                         <li>
@@ -49,9 +57,11 @@
                     <c:if test="${USER.getRole() eq 3}">
                         <!-- Staff -->
                     </c:if>
-                    <li>
-                        <a class="nav-link normal-link font-weight-bold" href="SignOutServlet">Logout</a>
-                    </li>
+                    <c:if test="${not USER eq null}">
+                        <li>
+                            <a class="nav-link normal-link font-weight-bold" href="SignOutServlet">Logout</a>
+                        </li>
+                    </c:if>
                 </ul>
         </div>
     </div>    

@@ -10,10 +10,31 @@
 <html>
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-        <title>Login page</title>
+        <link 
+            rel="stylesheet" 
+            href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css" 
+            integrity="sha384-9aIt2nRpC12Uk9gS9baDl411NQApFmC26EwAOH8WgZl5MYYxFfc+NcPb1dKGj7Sk" 
+            crossorigin="anonymous"
+        >
+        <link 
+            rel="stylesheet" 
+            href="http://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.4.0/css/font-awesome.min.css"
+        >
+        <link 
+            href="https://fonts.googleapis.com/css?family=Open+Sans:300,400,700" 
+            rel="stylesheet"
+        >
+        <link 
+            rel="stylesheet" 
+            type="text/css" 
+            href="statics/css/style.css"
+        >
+        <title>Home Page</title>
     </head>
     <body>
         
+        <%@include file="/WEB-INF/jsp/common/Header.jsp" %>
+
         <h1>Login Page</h1>
         <form action="LoginServlet" method="POST">
             <font color="red">
