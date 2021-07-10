@@ -7,6 +7,7 @@ package DTO;
 
 import java.io.Serializable;
 import java.sql.Date;
+import java.text.DecimalFormat;
 
 /**
  *
@@ -25,7 +26,7 @@ public class LaptopDTO implements Serializable{
     private float weight;
     private String region;
     private int year;
-
+    private String formatPrice1 = formatPrice();
     public LaptopDTO() {
     }
 
@@ -139,6 +140,11 @@ public class LaptopDTO implements Serializable{
     public void setYear(int year) {
         this.year = year;
     }
-
+    public String formatPrice (){
+        String pattern = "###,######.##";
+        DecimalFormat decimalformat = new DecimalFormat(pattern);
+        String format = decimalformat.format(price);
+        return format;
+    }
     
 }

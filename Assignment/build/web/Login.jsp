@@ -40,6 +40,6 @@
                 
             </table>
         </form>
-                <a href="signup.jsp">Sign up a new account</a>
+                <a href="SignUp.jsp">Sign up a new account</a>
     </body>
 </html>

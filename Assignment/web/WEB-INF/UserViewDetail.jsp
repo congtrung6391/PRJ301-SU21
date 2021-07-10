@@ -16,50 +16,90 @@
         <h1>Laptop Detail Information</h1>
         <c:set var="dto" value="${requestScope.Laptop}"/>
         <c:url var="urlRewriting" value="UserListServlet">
-        <c:param name="txtlaptopname" value="${lastSearchName}"/>
-        <c:param name="txtminprice" value="${lastSearchMinPrice}"/>
-        <c:param name="txtmaxprice" value="${lastSearchMaxPrice}"/>
-        <c:param name="txtminyear" value="${lastSearchMinYear}"/>
-        <c:param name="txtmaxyear" value="${lastSearchMaxYear}"/>
+            <c:param name="txtlaptopname" value="${requestScope.lastSearchName}"/>
+            <c:param name="txtminprice" value="${requestScope.lastSearchMinPrice}"/>
+            <c:param name="txtmaxprice" value="${requestScope.lastSearchMaxPrice}"/>
+            <c:param name="txtminyear" value="${requestScope.lastSearchMinYear}"/>
+            <c:param name="txtmaxyear" value="${requestScope.lastSearchMaxYear}"/>
+            <c:param name="btn" value="${requestScope.btn}"/>
         </c:url>
         <table>
             <tr>
-                Id : ${dto.id}
+                <td>
+                    Id : ${dto.id}
+                </td>
+                
             </tr>
             <tr>
-                Name : ${dto.name}
+                <td>
+                    Name : ${dto.name}
+                </td>
+                
             </tr>
             <tr>
-                Price : ${dto.price}
+                <td>
+                    Price : ${dto.price}
+                </td>
+                
             </tr>
             <tr>
-                CPU : ${dto.CPU}
+                <td>
+                    CPU : ${dto.CPU}
+                </td>
+                
             </tr>
             <tr>
-                Ram : ${dto.ram}
+                <td>
+                    Ram : ${dto.ram}
+                </td>
+                
             </tr>
             <tr>
-                Screen : ${dto.screen}
+                <td>
+                    Screen : ${dto.screen}
+                </td>
+                
             </tr>
             <tr>
-                Graphic : ${dto.graphic}
+                <td>
+                    Graphic : ${dto.graphic}
+                </td>
+                
             </tr>
             <tr>
-                Disk : ${dto.disk}
+                <td>
+                    Disk : ${dto.disk}
+                </td>
+                
             </tr>
             <tr>
-                OS : ${dto.oS}
+                <td>
+                    OS : ${dto.oS}
+                </td>
+                
             </tr>
             <tr>
-                Weight : ${dto.weight}
+                <td>
+                    Weight : ${dto.weight}
+                </td>
+                
             </tr>
             <tr>
-                Region : ${dto.region}
+                <td>
+                    Region : ${dto.region}
+                </td>
+                
             </tr>
             <tr>
-                Year : ${dto.year}
+                <td>
+                    Year : ${dto.year}
+                </td>
+                
             </tr>
         </table>
             <a href="${urlRewriting}">Click here to continue shopping</a>
+            
+                <input type="submit" value="Add To Cart" name="btn" />
+            </form>
     </body>
 </html>

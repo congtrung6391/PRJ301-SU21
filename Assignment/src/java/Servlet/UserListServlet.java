@@ -28,8 +28,10 @@ import javax.servlet.http.HttpSession;
  * @author congt
  */
 public class UserListServlet extends HttpServlet {
+
     private final String ERROR_PAGE = "Error.jsp";
     private final String USER_SEARCH_PAGE = "/WEB-INF/UserPage.jsp";
+
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
      * methods.
@@ -52,72 +54,76 @@ public class UserListServlet extends HttpServlet {
             String maxPrice = request.getParameter("txtmaxprice");
             String minYear = request.getParameter("txtminyear");
             String maxyear = request.getParameter("txtmaxyear");
-            if ("Search".equals(button)){
-                boolean valid = true;
-            HttpSession session = request.getSession();
-            UserDTO dto = (UserDTO) session.getAttribute("USER");
-            
-            
-            LaptopError lapError = new LaptopError();
-            if (!minPrice.matches("[0-9]+") || !maxPrice.matches("[0-9]+") && !minPrice.trim().isEmpty() && !maxPrice.trim().isEmpty()){
-                valid = false;
-                lapError.setPriceError("Price must be a number");
-                System.out.println("price");
-            }
-            if (!minYear.trim().matches("[0-9]+") || !maxyear.matches("[0-9]+")){
-                valid = false;
-                lapError.setYearError("Year must be a number");
-                System.out.println("year");
-            }
-            if (name.trim().isEmpty()){
-                valid = false;
-                lapError.setNameError("Name is not supposed to be empty");
-            }
-            if (minYear.trim().isEmpty()&& maxyear.trim().isEmpty()){
-                valid = false;
-                minYear = "";
-                maxyear = "";
-                
-            }
-            if (minPrice.trim().isEmpty() && maxPrice.trim().isEmpty()){
-                valid = false;
-                minPrice = "";
-                maxPrice = "";
-                
-            }
-            if (valid){
-                float minPrice1 = Float.parseFloat(minPrice);
-                float maxPrice1 = Float.parseFloat(maxPrice);
-                int minYear1 = Integer.parseInt(minYear);
-                int maxYear1 = Integer.parseInt(maxyear);
-                ArrayList<LaptopDTO> lapList = dao.SearchLaptop(name, minPrice1, maxPrice1, minYear1, maxYear1);
-                request.setAttribute("LapList", lapList);
-                for (LaptopDTO laptopDTO : lapList) {
-                    System.out.println(laptopDTO.getName());
+            if ("Search".equals(button)) {
+                int valid = 1 ;
+                HttpSession session = request.getSession();
+                UserDTO dto = (UserDTO) session.getAttribute("USER");
+
+                LaptopError lapError = new LaptopError();
+                if (!minPrice.matches("[0-9]+")  && !minPrice.trim().isEmpty() ) {                    
+                            valid = 0;
+                        lapError.setPriceError("Price must be a number");
+                        System.out.println(minPrice);
+                        
                 }
-                url = USER_SEARCH_PAGE;
-            }
-            else {
-                
-                request.setAttribute("ErrorInput", lapError);
-                url = USER_SEARCH_PAGE;
+                if (!minYear.trim().matches("[0-9]+") && !minYear.trim().isEmpty() ) {                  
+                            valid = 0;
+                        lapError.setYearError("Year must be a number");
+                            System.out.println(minYear);
+                        
                 }
-            }
-            else if ("SearchAllLaptop".equals(button)){
-                ArrayList<LaptopDTO> fullList = dao. getAllLaptop();
+                if (!maxPrice.matches("[0-9]+")  && !maxPrice.trim().isEmpty()) {                    
+                            valid = 0;
+                        lapError.setPriceError("Price must be a number");
+                        System.out.println(minPrice);
+                        
+                }
+                if ( !maxyear.matches("[0-9]+") && !maxyear.trim().isEmpty()) {                    
+                            valid = 0;
+                        lapError.setYearError("Year must be a number");
+                        System.out.println(minPrice);
+                        
+                }
+//                if (minYear == "" && maxyear == ""){
+//                minYear = "0"; maxyear = "0";
+//                }
+//                if (minPrice == "" && maxPrice == ""){
+//                    minPrice = "0"; maxPrice = "0";
+//                }
+              
+                if (name.trim().isEmpty()) {
+                    valid = 0;
+                    lapError.setNameError("Name is not supposed to be empty");
+                }
+                
+                if (valid == 1) {
+                    if (minPrice.trim().isEmpty()) minPrice="0";
+                    if (maxPrice.trim().isEmpty()) maxPrice = "0";
+                    if (minYear.trim().isEmpty()) minYear = "0";
+                    if (maxyear.trim().isEmpty()) maxyear = "0";
+                    float minPrice1 = Float.parseFloat(minPrice);
+                    float maxPrice1 = Float.parseFloat(maxPrice);
+                    int minYear1 = Integer.parseInt(minYear);
+                    int maxYear1 = Integer.parseInt(maxyear);
+                    ArrayList<LaptopDTO> lapList = dao.SearchLaptop(name, minPrice1, maxPrice1, minYear1, maxYear1);
+                    request.setAttribute("LapList", lapList);
+                    for (LaptopDTO laptopDTO : lapList) {
+                        System.out.println(laptopDTO.getPrice());
+                    }
+                } else if (valid == 0) {
+                    request.setAttribute("ErrorInput", lapError);
+                }
+            } else if ("SearchAllLaptop".equals(button)) {
+                ArrayList<LaptopDTO> fullList = dao.getAllLaptop();
                 request.setAttribute("LapList", fullList);
-                url = USER_SEARCH_PAGE;
             }
-            else if (name == null && minPrice == null && maxPrice == null && minYear == null && maxyear == null){
-                url = USER_SEARCH_PAGE;
-            }
-        }
-        catch (NamingException ex) {
-            log ("UserSearch's naming exception: " + ex.getMessage());
+            
+            url = USER_SEARCH_PAGE;
+        } catch (NamingException ex) {
+            log("UserSearch's naming exception: " + ex.getMessage());
         } catch (SQLException ex) {
-            log ("UserSearch's SQL exception: " + ex.getMessage());
-        }        
-        finally{
+            log("UserSearch's SQL exception: " + ex.getMessage());
+        } finally {
             request.getRequestDispatcher(url).forward(request, response);
             out.close();
         }
