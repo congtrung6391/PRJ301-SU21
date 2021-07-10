@@ -22,6 +22,14 @@
         <servlet-name>EmployeeListServlet</servlet-name>
         <servlet-class>Servlet.EmployeeListServlet</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>AdminUpdateServlet</servlet-name>
+        <servlet-class>Servlet.AdminUpdateServlet</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>AdminDeleteServlet</servlet-name>
+        <servlet-class>Servlet.AdminDeleteServlet</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>AdminListServlet</servlet-name>
         <url-pattern>/AdminListServlet</url-pattern>
@@ -33,6 +41,14 @@
     <servlet-mapping>
         <servlet-name>EmployeeListServlet</servlet-name>
         <url-pattern>/EmployeeListServlet</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>AdminUpdateServlet</servlet-name>
+        <url-pattern>/AdminUpdateServlet</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>AdminDeleteServlet</servlet-name>
+        <url-pattern>/AdminDeleteServlet</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>

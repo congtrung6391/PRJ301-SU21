@@ -20,7 +20,7 @@ import javax.servlet.http.HttpSession;
  */
 @WebServlet(name = "SignOutServlet", urlPatterns = {"/SignOutServlet"})
 public class SignOutServlet extends HttpServlet {
-    private final String LOGIN_PAGE = "login.jsp";
+    private final String LOGIN_PAGE = "Login.jsp";
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
      * methods.
@@ -34,12 +34,16 @@ public class SignOutServlet extends HttpServlet {
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
         PrintWriter out = response.getWriter();
-        String url = LOGIN_PAGE;
+        String url = "";
         try {
-            HttpSession session = request.getSession();
-            if (session != null){
-                session.removeAttribute("USER");
-            }
+            
+                HttpSession session = request.getSession();
+                if (session != null){
+                    session.invalidate();
+                    url = LOGIN_PAGE;
+                }
+            
+            
         }
         catch (Exception e){
             log(e.getMessage());
