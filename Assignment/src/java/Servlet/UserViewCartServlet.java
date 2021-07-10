@@ -50,10 +50,12 @@ public class UserViewCartServlet extends HttpServlet {
             String btn = request.getParameter("lastbtn");
             
             List<ShoppingCartDTO> cart = (List<ShoppingCartDTO>) session.getAttribute("cart");
+            if (cart != null){
             for (ShoppingCartDTO shoppingCartDTO : cart) {
                 int count = shoppingCartDTO.getQuantity();
                 totalprice += shoppingCartDTO.getLaptop().getPrice()*count;
             }
+        }
             request.setAttribute("txtlastname", name);
             request.setAttribute("txtlastminprice", minPrice);
             request.setAttribute("txtlastmaxprice", maxPrice);

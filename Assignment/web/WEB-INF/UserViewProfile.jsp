@@ -4,6 +4,7 @@
     Author     : khang
 --%>
 
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>
@@ -13,24 +14,33 @@
     </head>
     <body>
         <h1>Your Profile</h1>
+        
         <form action="UserUpdateServlet">
             <font color="red">
                 ${requestScope.Updatesuccess}
+                ${requestScope.Fail}
             </font>
         <table>
             <tr>
                 <td>Username:</td>
                 <td>
-                    <input type="text" name="txtusername" value="${sessionScope.USER.username}" />
-                    <font color="red">
-                    ${requestScope.Error.usernameError}
-                    </font>
+                    <input type="text" name="txtusername" value="${sessionScope.USER.username}" readonly />
                 </td>
             </tr>
             <tr>
                 <td>Password:</td>
                 <td>
-                    <input type="password" name="txtpassword" value="${sessionScope.USER.password}" />
+                    <input type="password" name="txtpassword" 
+                           <c:if test="${empty requestScope.ERROR.passwordError}">
+                               value="${sessionScope.USER.password}"
+                           </c:if>
+                           <c:if test="${not empty requestScope.ERROR.passwordError}">
+                               value=""
+                           </c:if>
+                            />
+                    
+                </td>
+                <td>
                     <font color="red">
                         ${requestScope.Error.passwordError}
                     </font>
@@ -39,7 +49,17 @@
             <tr>
                 <td>Full Name:</td>
                 <td>
-                    <input type="text" name="txtfullname" value="${sessionScope.USER.name}" />
+                    <input type="text" name="txtfullname" 
+                           <c:if test="${empty requestScope.Error.nameError}">
+                               value="${sessionScope.USER.name}"
+                           </c:if>
+                           <c:if test="${not empty requestScope.Error.nameError}">
+                               value="${param.txtfullname}"
+                           </c:if>
+                            />
+                    
+                </td>
+                <td>
                     <font color="red">
                         ${requestScope.Error.nameError}
                     </font>
@@ -48,18 +68,38 @@
             <tr>
                 <td>Phone:</td>
                 <td>
-                    <input type="number" name="txtphone" value="${sessionScope.USER.phone}" />
+                    <input type="number" name="txtphone" 
+                           <c:if test="${empty requestScope.Error.phoneError}">
+                               value="${sessionScope.USER.phone}"
+                           </c:if>
+                           <c:if test="${not empty requestScope.Error.phoneError}">
+                               value ="${param.txtphone}"
+                           </c:if>
+                            />
+                    
+                </td>
+                <td>
                     <font color="red">
-                    ${requestScope.phoneError}
+                    ${requestScope.Error.phoneError}
                     </font>
                 </td>
             </tr>
             <tr>
                 <td>Address:</td>
                 <td>
-                    <input type="text" name="txtaddress" value="${sessionScope.USER.address}" />
+                    <input type="text" name="txtaddress" 
+                           <c:if test="${empty requestScope.Error.addressError}">
+                               value="${sessionScope.USER.address}"
+                           </c:if>
+                           <c:if test="${not empty requestScope.Error.addressError}">
+                               value="${param.txtaddress}"
+                           </c:if>
+                            />
+                    
+                </td>
+                <td>
                     <font color="red">
-                    ${requestScope.addressError}
+                    ${requestScope.Error.addressError}
                     </font>
                 </td>
             </tr>

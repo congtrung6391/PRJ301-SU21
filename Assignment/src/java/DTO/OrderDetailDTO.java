@@ -12,19 +12,29 @@ import java.io.Serializable;
  * @author khang
  */
 public class OrderDetailDTO implements Serializable{
+    private int orderDetailId;
     private LaptopDTO laptop;    
     private OrderDTO order ;
     int quantity;
 
     public OrderDetailDTO() {
     }
-
-    public OrderDetailDTO(LaptopDTO laptop, OrderDTO order, int quantity) {
+    public OrderDetailDTO(int orderDetailId,LaptopDTO laptop, OrderDTO order, int quantity) {
+        this.orderDetailId = orderDetailId;
         this.laptop = laptop;
         this.order = order;
         this.quantity = quantity;
+        
     }
 
+    public int getOrderDetailId() {
+        return orderDetailId;
+    }
+
+    public void setOrderDetailId(int orderDetailId) {
+        this.orderDetailId = orderDetailId;
+    }
+    
     public LaptopDTO getLaptop() {
         return laptop;
     }
