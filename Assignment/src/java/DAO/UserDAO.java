@@ -28,7 +28,7 @@ public class UserDAO {
             if (con != null){
                 String sql = "select UserID ,Username, Password, Name, Role,Phone, Address  "
                         + "from Users "
-                        + "where UserID = ? and Password = ?";
+                        + "where Username = ? and Password = ?";
                 ps = con.prepareStatement(sql);
                 ps.setString(1, username);
                 ps.setString(2, password);
@@ -243,5 +243,47 @@ public class UserDAO {
             }
         }
         return false;
+    }
+    public int createUser (String username,String password,int role,String name,String phone,String Address) throws NamingException, SQLException{
+        Connection con = null ;
+        PreparedStatement ps = null;
+        ResultSet rs = null;
+        int userId = -1;
+        try {
+            con = DBHelper.makeConnection();
+            if (con != null){
+                String sql = "insert into Users "
+                        + "values (?,?,?,?,?,?)";
+                ps = con.prepareStatement(sql);
+                ps.setString(1, username);
+                ps.setString(2, password);
+                ps.setInt(3, role);
+                ps.setString(4, name);
+                ps.setString(5, phone);
+                ps.setString(6, Address);
+                ps.executeUpdate();
+                
+                sql = "select @@IDENTITY as UserID";
+                ps = con.prepareStatement(sql);
+                rs = ps.executeQuery();
+                if (rs.next()){
+                    userId = rs.getInt("UserID");
+                    System.out.println(userId);
+                    return userId;
+                }
+            }
+        } 
+        finally{
+            if (ps != null){
+                ps.close();
+            }
+            if (con != null){
+                con.close();
+            }
+            if (rs != null){
+                rs.close();
+            }
+        }
+        return userId;
     }
 }

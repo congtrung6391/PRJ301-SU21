@@ -24,23 +24,23 @@ import javax.servlet.http.HttpSession;
  * @author congt
  */
 public class FilterMainController implements Filter {
-    
+
     private static final String LOGIN_PAGE = "Login.jsp";
-    private static final String ERROR_ROLE = "ErrorRole.jsp";
-    private static final String USER_DEFAULT = "USerListServlet";
+    private static final String ERROR_ROLE = "/WEB-INF/ErrorRole.jsp";
+    private static final String USER_DEFAULT = "/WEB-INF/UserPage.jsp";
     private static final String EMPLOYEE_DEFAULT = "EmployeeListServlet";
     private static final String ADMIN_DEFAULT = "AdminListServlet";
-    
+
     private static final boolean debug = true;
 
     // The filter configuration object we are associated with.  If
     // this value is null, this filter instance is not currently
     // configured. 
     private FilterConfig filterConfig = null;
-    
+
     public FilterMainController() {
-    }    
-    
+    }
+
     private void doBeforeProcessing(ServletRequest request, ServletResponse response)
             throws IOException, ServletException {
         if (debug) {
@@ -67,8 +67,8 @@ public class FilterMainController implements Filter {
 	    log(buf.toString());
 	}
          */
-    }    
-    
+    }
+
     private void doAfterProcessing(ServletRequest request, ServletResponse response)
             throws IOException, ServletException {
         if (debug) {
@@ -106,63 +106,52 @@ public class FilterMainController implements Filter {
     public void doFilter(ServletRequest request, ServletResponse response,
             FilterChain chain)
             throws IOException, ServletException {
-        
+
         HttpServletRequest req = (HttpServletRequest) request;
         HttpSession session = req.getSession();
         UserDTO user = (UserDTO) session.getAttribute("USER");
-        
+
         String uri = req.getRequestURI();
         int lastIndex = uri.lastIndexOf("/");
-        String resource = uri.substring(lastIndex+1);
-        
-        
+        String resource = uri.substring(lastIndex + 1);
+
         String url = null;
-        
-        if (!resource.startsWith("Error")) {
-  
+
+        if (!resource.startsWith("Error") && !resource.startsWith("SignOut") && !resource.startsWith("SignUp") ) {
+
             if (user == null) {
-                if (resource.length() > 0 && !resource.startsWith("Login")) {
+                if (resource.length() > 0 && !resource.startsWith("Login") ) {
                     request.setAttribute("NotLogin", "You have to Login first");
                     url = LOGIN_PAGE;
                 } else if (resource.length() == 0) {
-                    
                     url = LOGIN_PAGE;
                 }
-                
 
-            } else {
-                if (user.getRole() == 3) { // 
+            } else if (user.getRole() == 2) { // 
 
-                    if (resource.length() == 0 || resource.startsWith("Login")) {
-                        url = USER_DEFAULT;
-                    } else if (!resource.startsWith("User")) {
-                        url = ERROR_ROLE;
-                    }
+                if (resource.length() == 0 || resource.startsWith("Login")) {
+                    url = USER_DEFAULT;
+                } else if (!resource.startsWith("User")) {
 
-                } else if (user.getRole() == 2) { // 
-                    if (resource.length() == 0 || resource.startsWith("Login")) {
-                        url = EMPLOYEE_DEFAULT;
-                    } else if (!resource.startsWith("Employee")) {
-                        url = ERROR_ROLE;
-                    }
+                    url = ERROR_ROLE;
+                }
+            } else if (user.getRole() == 3) { // 
+                if (resource.length() == 0 || resource.startsWith("Login")) {
+                    url = EMPLOYEE_DEFAULT;
+                } else if (!resource.startsWith("Employee")) {
+                    url = ERROR_ROLE;
+                }
 
-                } else if (user.getRole() == 1) { 
-                    
-                    if (resource.length() == 0 || resource.startsWith("Login")) {                       
-                        url = ADMIN_DEFAULT;
-                        System.out.println(url);
-                    }
-                    } else if (!resource.startsWith("Admin")) {
-                        
-                        url = ERROR_ROLE;
-                        System.out.println(url);
-                    }
+            } else if (user.getRole() == 1) {
+                if (resource.length() == 0 || resource.startsWith("Login")) {
+                    url = ADMIN_DEFAULT;
+                } else if (!resource.startsWith("Admin")) {
+
+                    url = ERROR_ROLE;
                 }
             }
-        
-        
+        }
 
-        
         if (url == null) {
             chain.doFilter(request, response);
         } else {
@@ -189,16 +178,16 @@ public class FilterMainController implements Filter {
     /**
      * Destroy method for this filter
      */
-    public void destroy() {        
+    public void destroy() {
     }
 
     /**
      * Init method for this filter
      */
-    public void init(FilterConfig filterConfig) {        
+    public void init(FilterConfig filterConfig) {
         this.filterConfig = filterConfig;
         if (filterConfig != null) {
-            if (debug) {                
+            if (debug) {
                 log("FilterMainController:Initializing filter");
             }
         }
@@ -217,20 +206,20 @@ public class FilterMainController implements Filter {
         sb.append(")");
         return (sb.toString());
     }
-    
+
     private void sendProcessingError(Throwable t, ServletResponse response) {
-        String stackTrace = getStackTrace(t);        
-        
+        String stackTrace = getStackTrace(t);
+
         if (stackTrace != null && !stackTrace.equals("")) {
             try {
                 response.setContentType("text/html");
                 PrintStream ps = new PrintStream(response.getOutputStream());
-                PrintWriter pw = new PrintWriter(ps);                
+                PrintWriter pw = new PrintWriter(ps);
                 pw.print("<html>\n<head>\n<title>Error</title>\n</head>\n<body>\n"); //NOI18N
 
                 // PENDING! Localize this for next official release
-                pw.print("<h1>The resource did not process correctly</h1>\n<pre>\n");                
-                pw.print(stackTrace);                
+                pw.print("<h1>The resource did not process correctly</h1>\n<pre>\n");
+                pw.print(stackTrace);
                 pw.print("</pre></body>\n</html>"); //NOI18N
                 pw.close();
                 ps.close();
@@ -247,7 +236,7 @@ public class FilterMainController implements Filter {
             }
         }
     }
-    
+
     public static String getStackTrace(Throwable t) {
         String stackTrace = null;
         try {
@@ -261,9 +250,9 @@ public class FilterMainController implements Filter {
         }
         return stackTrace;
     }
-    
+
     public void log(String msg) {
-        filterConfig.getServletContext().log(msg);        
+        filterConfig.getServletContext().log(msg);
     }
-    
+
 }

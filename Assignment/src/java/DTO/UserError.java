@@ -17,8 +17,8 @@ public class UserError  implements Serializable {
     private String passwordError ;
     private String roleError ;
     private String nameError ;
-    private String PhoneError;
-    private String AddressError;
+    private String phoneError;
+    private String addressError;
 
     public UserError() {
         this.userId = -1;
@@ -26,8 +26,8 @@ public class UserError  implements Serializable {
         this.passwordError = null;
         this.roleError = null;
         this.nameError = null;
-        this.PhoneError = null;
-        this.AddressError = null;
+        this.phoneError = null;
+        this.addressError = null;
     }
 
     public UserError(int userId, String usernameError, String passwordError, String roleError, String nameError, String PhoneError, String AddressError) {
@@ -36,8 +36,8 @@ public class UserError  implements Serializable {
         this.passwordError = passwordError;
         this.roleError = roleError;
         this.nameError = nameError;
-        this.PhoneError = PhoneError;
-        this.AddressError = AddressError;
+        this.phoneError = PhoneError;
+        this.addressError = AddressError;
     }
 
     public int getUserId() {
@@ -81,19 +81,19 @@ public class UserError  implements Serializable {
     }
 
     public String getPhoneError() {
-        return PhoneError;
+        return phoneError;
     }
 
     public void setPhoneError(String PhoneError) {
-        this.PhoneError = PhoneError;
+        this.phoneError = PhoneError;
     }
 
     public String getAddressError() {
-        return AddressError;
+        return addressError;
     }
 
     public void setAddressError(String AddressError) {
-        this.AddressError = AddressError;
+        this.addressError = AddressError;
     }
     
     

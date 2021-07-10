@@ -7,6 +7,7 @@ package DTO;
 
 import java.io.Serializable;
 import java.sql.Date;
+import java.text.DecimalFormat;
 
 /**
  *
@@ -17,31 +18,31 @@ public class LaptopDTO implements Serializable{
     private String name ;
     private float price ;
     private String CPU;
-    private String Ram;
-    private String Screen ;
-    private String Graphic;
-    private String Disk ;
-    private String OS ;
+    private String ram;
+    private String screen ;
+    private String graphic;
+    private String disk ;
+    private String oS ;
     private float weight;
     private String region;
-    private int Year;
-
+    private int year;
+    private String formatPrice1 = formatPrice();
     public LaptopDTO() {
     }
 
-    public LaptopDTO(int id, String name, float price, String CPU, String Ram, String Screen, String Graphic, String Disk, String OS, float weight, String region, int Year) {
+    public LaptopDTO(int id, String name, float price, String CPU, String ram, String screen, String graphic, String disk, String oS, float weight, String region, int year) {
         this.id = id;
         this.name = name;
         this.price = price;
         this.CPU = CPU;
-        this.Ram = Ram;
-        this.Screen = Screen;
-        this.Graphic = Graphic;
-        this.Disk = Disk;
-        this.OS = OS;
+        this.ram = ram;
+        this.screen = screen;
+        this.graphic = graphic;
+        this.disk = disk;
+        this.oS = oS;
         this.weight = weight;
         this.region = region;
-        this.Year = Year;
+        this.year = year;
     }
 
     public int getId() {
@@ -77,43 +78,43 @@ public class LaptopDTO implements Serializable{
     }
 
     public String getRam() {
-        return Ram;
+        return ram;
     }
 
-    public void setRam(String Ram) {
-        this.Ram = Ram;
+    public void setRam(String ram) {
+        this.ram = ram;
     }
 
     public String getScreen() {
-        return Screen;
+        return screen;
     }
 
-    public void setScreen(String Screen) {
-        this.Screen = Screen;
+    public void setScreen(String screen) {
+        this.screen = screen;
     }
 
     public String getGraphic() {
-        return Graphic;
+        return graphic;
     }
 
-    public void setGraphic(String Graphic) {
-        this.Graphic = Graphic;
+    public void setGraphic(String graphic) {
+        this.graphic = graphic;
     }
 
     public String getDisk() {
-        return Disk;
+        return disk;
     }
 
-    public void setDisk(String Disk) {
-        this.Disk = Disk;
+    public void setDisk(String disk) {
+        this.disk = disk;
     }
 
-    public String getOS() {
-        return OS;
+    public String getoS() {
+        return oS;
     }
 
-    public void setOS(String OS) {
-        this.OS = OS;
+    public void setoS(String oS) {
+        this.oS = oS;
     }
 
     public float getWeight() {
@@ -133,11 +134,17 @@ public class LaptopDTO implements Serializable{
     }
 
     public int getYear() {
-        return Year;
+        return year;
     }
 
-    public void setYear(int Year) {
-        this.Year = Year;
+    public void setYear(int year) {
+        this.year = year;
+    }
+    public String formatPrice (){
+        String pattern = "###,######.##";
+        DecimalFormat decimalformat = new DecimalFormat(pattern);
+        String format = decimalformat.format(price);
+        return format;
     }
     
 }

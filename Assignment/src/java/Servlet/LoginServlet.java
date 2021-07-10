@@ -27,8 +27,9 @@ import javax.servlet.http.HttpSession;
 @WebServlet(name = "LoginServlet", urlPatterns = {"/LoginServlet"})
 public class LoginServlet extends HttpServlet {
     private final String LOGIN_SUCCESS = "";
+    private final String LOGIN_ADMIN_SUCCESS = "/WEB-INF/jsp/AdminList.jsp";
     private final String LOGIN_PAGE = "Login.jsp";
-    private final String LOGIN_USER_SUCCESS = "/WEB-INF/usersearch.jsp";
+    private final String LOGIN_USER_SUCCESS = "/WEB-INF/UserPage.jsp";
     private final String LOGIN_FAIL = "/WEB-INF/error.jsp";
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -53,7 +54,13 @@ public class LoginServlet extends HttpServlet {
             
             if (dto != null){
                 session.setAttribute("USER", dto);
-                url = LOGIN_SUCCESS;
+//                if (dto.getRole() == 1){
+//                    url = LOGIN_ADMIN_SUCCESS;
+//                }
+//                else if (dto.getRole() == 2){
+//                    url = LOGIN_USER_SUCCESS;
+//                }
+            url = LOGIN_SUCCESS;
             }
             else {
                 request.setAttribute("ErrorLogin", "Invalid username or Password");
@@ -63,9 +70,9 @@ public class LoginServlet extends HttpServlet {
         }
         catch (SQLException ex) {
             ex.printStackTrace();
-            log ("LoginServlet's exception: " + ex.getMessage());
+            log ("LoginServlet's SQL exception: " + ex.getMessage());
         } catch (NamingException ex) {
-            log ("LoginServlet's exception: " + ex.getMessage());
+            log ("LoginServlet's Naming exception: " + ex.getMessage());
         }        
         finally{
             
