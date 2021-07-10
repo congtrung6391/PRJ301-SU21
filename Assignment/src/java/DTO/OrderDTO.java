@@ -12,19 +12,28 @@ import java.io.Serializable;
  * @author khang
  */
 public class OrderDTO implements Serializable{
+    private int orderid;
     private UserDTO user ;
-    private String Address ;
+    private String address ;
     private float totalprice;
 
     public OrderDTO() {
     }
 
-    public OrderDTO(UserDTO user, String Address, float totalprice) {
+    public OrderDTO(int orderDTO, UserDTO user, String Address, float totalprice) {
+        this.orderid = orderDTO;
         this.user = user;
-        this.Address = Address;
+        this.address = Address;
         this.totalprice = totalprice;
     }
 
+    public int getorderid() {
+        return orderid;
+    }
+
+    public void setorderid(int orderid) {
+        this.orderid = orderid;
+    }
     public UserDTO getUser() {
         return user;
     }
@@ -34,11 +43,11 @@ public class OrderDTO implements Serializable{
     }
 
     public String getAddress() {
-        return Address;
+        return address;
     }
 
     public void setAddress(String Address) {
-        this.Address = Address;
+        this.address = Address;
     }
 
     public float getTotalprice() {

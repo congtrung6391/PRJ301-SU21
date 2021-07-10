@@ -21,7 +21,7 @@
         <form action="UserViewProfileServlet">
             <input type="submit"  value="View Profile" name="btn" />
         </form>
-        
+        <a href="UserViewOrderServlet">View History Order</a>
         <form action="UserListServlet" method="POST">
             <table>
                 <tr>

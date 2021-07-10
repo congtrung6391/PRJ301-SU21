@@ -117,7 +117,11 @@ public class UserListServlet extends HttpServlet {
                 ArrayList<LaptopDTO> fullList = dao.getAllLaptop();
                 request.setAttribute("LapList", fullList);
             }
-            
+            else if (button == null){
+                ArrayList<LaptopDTO> fullList = dao.getAllLaptop();
+                request.setAttribute("LapList", fullList);
+                System.out.println("a");
+            }
             url = USER_SEARCH_PAGE;
         } catch (NamingException ex) {
             log("UserSearch's naming exception: " + ex.getMessage());
