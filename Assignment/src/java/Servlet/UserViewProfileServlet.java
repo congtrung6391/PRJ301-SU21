@@ -19,7 +19,7 @@ import javax.servlet.http.HttpServletResponse;
  */
 @WebServlet(name = "UserViewProfileServlet", urlPatterns = {"/UserViewProfileServlet"})
 public class UserViewProfileServlet extends HttpServlet {
-    private final String RESULT_PAGE = "/WEB-INF/UserViewProfile.jsp";
+    private final String RESULT_PAGE = "/WEB-INF/jsp/user/UserViewProfile.jsp";
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
      * methods.

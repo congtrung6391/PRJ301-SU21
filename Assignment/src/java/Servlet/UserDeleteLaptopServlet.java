@@ -29,7 +29,7 @@ import javax.servlet.http.HttpSession;
 public class UserDeleteLaptopServlet extends HttpServlet {
 
     private final String ERROR_PAGE = "/WEB-INF/Error.jsp";
-    private final String SUCCESS = "/WEB-INF/UserViewCart.jsp";
+    private final String SUCCESS = "/WEB-INF/jsp/user/UserViewCart.jsp";
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -61,7 +61,7 @@ public class UserDeleteLaptopServlet extends HttpServlet {
                     
                 } else if (list.size() == 1) {
                     list.remove(index);
-                    session.removeAttribute("cart");
+                    // session.removeAttribute("cart");
                 }
             }
             url = SUCCESS;

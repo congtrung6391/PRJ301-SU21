@@ -26,7 +26,7 @@ import javax.servlet.http.HttpServletResponse;
 @WebServlet(name = "UserViewDetailServlet", urlPatterns = {"/UserViewDetailServlet"})
 public class UserViewDetailServlet extends HttpServlet {
     private final String ERROR_PAGE = "Error.jsp";
-    private final String VIEW_DETAIL_PAGE = "/WEB-INF/UserViewDetail.jsp";
+    private final String VIEW_DETAIL_PAGE = "/WEB-INF/jsp/user/UserViewDetail.jsp";
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
      * methods.
