@@ -52,6 +52,7 @@
                             </font>
                         </div>
                     </div>
+                            ${param.name eq null ? obj.name : param.name}
                     <div class="row mt-2">
                         <div class="col-md-6">
                             <label for="txtfullname">Full name</label>
