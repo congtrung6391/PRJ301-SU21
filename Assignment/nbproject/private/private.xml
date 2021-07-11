@@ -3,12 +3,8 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
-            <file>file:/D:/Projects/fptu-schoolwork/PRJ/PRJ301-SU21/Assignment/web/WEB-INF/web.xml</file>
-            <file>file:/D:/Projects/fptu-schoolwork/PRJ/PRJ301-SU21/Assignment/src/java/Servlet/UserListServlet.java</file>
-            <file>file:/D:/Projects/fptu-schoolwork/PRJ/PRJ301-SU21/Assignment/web/Login.jsp</file>
-            <file>file:/D:/Projects/fptu-schoolwork/PRJ/PRJ301-SU21/Assignment/src/java/Servlet/UserViewDetailServlet.java</file>
-            <file>file:/D:/Projects/fptu-schoolwork/PRJ/PRJ301-SU21/Assignment/src/java/filters/FilterMainController.java</file>
-            <file>file:/D:/Projects/fptu-schoolwork/PRJ/PRJ301-SU21/Assignment/src/java/Servlet/LoginServlet.java</file>
+            <file>file:/C:/Users/SE140866/Documents/GitHub/PRJ301-SU21/Assignment/src/java/Servlet/AdminDeleteServlet.java</file>
+            <file>file:/C:/Users/SE140866/Documents/GitHub/PRJ301-SU21/Assignment/src/java/filters/FilterMainController.java</file>
         </group>
     </open-files>
 </project-private>

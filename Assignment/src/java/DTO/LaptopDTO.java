@@ -140,6 +140,21 @@ public class LaptopDTO implements Serializable{
     public void setYear(int year) {
         this.year = year;
     }
+    @Override
+    public String toString() {
+        return id + "=" + 
+                name + "=" + 
+                price + "=" + 
+                CPU + "=" + 
+                ram + "=" + 
+                screen + "=" + 
+                graphic + "=" + 
+                disk + "=" + 
+                oS + "=" + 
+                weight + "=" + 
+                region + "=" + 
+                year;
+    }
     public String formatPrice (){
         String pattern = "###,######.##";
         DecimalFormat decimalformat = new DecimalFormat(pattern);
