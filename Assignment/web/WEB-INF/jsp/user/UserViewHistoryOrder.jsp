@@ -61,7 +61,7 @@
                                     <fmt:formatNumber value="${order.totalprice}" maxFractionDigits="3"/>
                                 </td>
                                 <td>
-                                    <a href="UserViewDetailCartServlet?id=${order.orderid}">View Detail</a>
+                                    <a href="UserViewDetailOrderServlet?id=${order.orderid}">View Detail</a>
                                 </td>
                             </tr>
                             </c:forEach>

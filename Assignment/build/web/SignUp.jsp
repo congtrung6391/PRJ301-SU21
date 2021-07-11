@@ -53,21 +53,21 @@
                     </font> 
                 </div>
                 <div class="mt-2">
-                    <lable for="txtname">Username</lable>
+                    <lable for="txtname">Full Name</lable>
                     <input class="form-control" id="txtname" type="text" name="txtname" value="${param.txtname}" />
                     <font color="red">
                         ${errorobj.nameError}
                     </font>
                 </div>
                 <div class="mt-2">
-                    <lable for="txtphone">Username</lable>
+                    <lable for="txtphone">Phone</lable>
                     <input class="form-control" id="txtphone" type="text" name="txtphone" value="${param.txtphone}" />
                     <font color="red">
                         ${errorobj.phoneError}
                     </font>
                 </div>
                 <div class="mt-2">
-                    <lable for="txtaddress">Username</lable>
+                    <lable for="txtaddress">Address</lable>
                     <input class="form-control" id="txtaddress" type="text" name="txtaddress" value="${param.txtaddress}" />
                     <font color="red">
                         ${errorobj.phoneError}

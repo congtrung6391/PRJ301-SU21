@@ -55,29 +55,28 @@ public class UserListServlet extends HttpServlet {
             String maxPrice = request.getParameter("txtmaxprice");
             String minYear = request.getParameter("txtminyear");
             String maxyear = request.getParameter("txtmaxyear");
-            
             if ("Search".equals(button)) {
                 int valid = 1 ;
                 HttpSession session = request.getSession();
                 UserDTO dto = (UserDTO) session.getAttribute("USER");
 
                 LaptopError lapError = new LaptopError();
-                if (!minPrice.isEmpty() && !minPrice.matches("[0-9]+")  && !minPrice.trim().isEmpty() ) {                    
+                if (!minPrice.matches("[0-9]+") && !minPrice.trim().isEmpty()) {                    
                             valid = 0;
                         lapError.setPriceError("Price must be a number");
                         
                 }
-                if (!minYear.isEmpty() && !minYear.trim().isEmpty() && !minYear.trim().matches("[0-9]+")) {                  
+                if (!minYear.matches("[0-9]+") && !minYear.trim().isEmpty() ) {                  
                             valid = 0;
                         lapError.setYearError("Year must be a number");
                         
                 }
-                if (!maxPrice.isEmpty() && !maxPrice.matches("[0-9]+")  && !maxPrice.trim().isEmpty()) {                    
+                if (!maxPrice.matches("[0-9]+") && !maxPrice.trim().isEmpty() ) {                    
                             valid = 0;
                         lapError.setPriceError("Price must be a number");
                         
                 }
-                if (!maxyear.isEmpty() && !maxyear.matches("[0-9]+") && !maxyear.trim().isEmpty()) {                    
+                if (!maxyear.trim().isEmpty() && !maxyear.matches("[0-9]+") ) {                    
                             valid = 0;
                         lapError.setYearError("Year must be a number");
                         
@@ -90,7 +89,6 @@ public class UserListServlet extends HttpServlet {
 //                }
               
                 name = name.trim();
-                
                 if (valid == 1) {
                     if (minPrice.trim().isEmpty()) minPrice="0";
                     if (maxPrice.trim().isEmpty()) maxPrice = "0";
@@ -111,8 +109,10 @@ public class UserListServlet extends HttpServlet {
             } else if (button == null){
                 ArrayList<LaptopDTO> fullList = dao.getAllLaptop();
                 request.setAttribute("LapList", fullList);
-                System.out.println("a");
-            } else {
+                
+            }
+                
+             else {
                 ArrayList<LaptopDTO> fullList = dao.getAllLaptop();
                 request.setAttribute("LapList", fullList);
             }

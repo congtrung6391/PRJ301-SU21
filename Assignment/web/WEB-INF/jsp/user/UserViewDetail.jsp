@@ -91,6 +91,12 @@
                 </div>
                 
                 <form action="UserAddItemToCart">
+                    <input type="hidden" name="lastname" value="${requestScope.lastSearchName}"/>
+                    <input type="hidden" name="lastminprice" value="${requestScope.lastSearchMinPrice}"/>
+                    <input type="hidden" name="lastmaxprice" value="${requestScope.lastSearchMaxPrice}"/>
+                    <input type="hidden" name="lastminyear" value="${requestScope.lastSearchMinYear}"/>
+                    <input type="hidden" name="lastmaxyear" value="${requestScope.lastSearchMaxYear}"/>
+                    <input type="hidden" name="lastbtn" value="${requestScope.btn}"/>
                     <input type="hidden" value="${dto.id}" name="txtLaptopId" />
                     <input class="btn btn-info" type="submit" value="Add To Cart" name="btn" />
                 </form>
