@@ -7,6 +7,7 @@
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <%@taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
+<%@taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <html>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <link 
@@ -85,7 +86,7 @@
 
                                     </td>
                                     <td>
-                                        ${lap.laptop.price}
+                                        <fmt:formatNumber value="${lap.laptop.price}" maxFractionDigits="3"/>
                                     </td>
                                     <td>
                                         <a href="UserDeleteLaptopServlet?id=${lap.laptop.id}&totalprice=${requestScope.totalprice}">Delete</a>
@@ -99,8 +100,7 @@
                                     Total Price :
                                 </td>
                                 <td>
-
-                                    ${requestScope.totalprice}
+                                    <fmt:formatNumber value="${requestScope.totalprice}" maxFractionDigits="3"/>
                                 </td>
                             </tr>
                         </tbody>

@@ -6,6 +6,7 @@
 
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
+<%@taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <!DOCTYPE html>
 <html>
     <head>
@@ -84,7 +85,7 @@
                             <strong>Year :</strong> ${dto.year}
                         </p>
                         <p class="font-weight-bold">
-                            Price : ${dto.price} $
+                            Price : <fmt:formatNumber value="${dto.price}" maxFractionDigits="3"/> $
                         </p>
                     </div>
                 </div>
