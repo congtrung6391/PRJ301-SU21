@@ -16,14 +16,13 @@
     </head>
     <body>
         <h1>Laptop Manager</h1>
-        <form action = "LoadListServlet" method = "POST">
+        <form action = "EmployeeLoadListServlet" method = "POST">
             Hello
             <a href='SignOutServlet'>Sign Out</a>
             ||<a href='EditProfileServlet'>Edit Profile</a></br></br>
             Search by ID: <input type="text" name="searchID" value="${param.searchID}">
             Search by Name: <input type="text" name="searchName" value="${param.searchName}">
             <input type="submit" name="search" value="Search">
-        </form>
         </br>
         <table border="1">
             <thead>
@@ -46,22 +45,36 @@
                         <td>${obj.id}</td>
                         <td>${obj.name}</td>
                         <td>${obj.price}</td>
-                        <td>${obj.cpu}</td>
+                        <td>${obj.CPU}</td>
                         <td>${obj.ram}</td>
                         <td>${obj.screen}</td>
                         <td>${obj.graphic}</td>
                         <td>${obj.disk}</td>
-                        <td>${obj.os}</td>
+                        <td>${obj.oS}</td>
                         <td>${obj.weight}</td>
                         <td>${obj.region}</td>
                         <td>${obj.year}</td>
-                        <td><a href='EditServlet?elid=${obj.id}'>Edit</a></td>
-                        <td><a href='DeleteServlet?dlid=${obj.id}'>Delete</a></td>
+                        <td>
+                            <input
+                                type="submit"
+                                formaction="EmployeeEditServlet?elid=${obj.id}"
+                                value="Edit"
+                            />
+                        </td>
+                        <td>
+                            <input
+                                type="submit"
+                                formaction="EmployeeDeleteServlet?dlid=${obj.id}"
+                                value="Delete"
+                                onClick="return confirm('Delete ${obj.id}')"
+                            />
+                        </td>
                     </tr>
                 </c:forEach>
             </thead>
         </table>
+        </form>
         </br>
-        <a href='EditServlet?elid=0'>Add New Laptop</a>
+        <a href='EmployeeEditServlet?elid=0'>Add New Laptop</a>
     </body>
 </html>

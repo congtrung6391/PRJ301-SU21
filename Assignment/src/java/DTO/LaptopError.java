@@ -127,5 +127,10 @@ public class LaptopError implements Serializable{
     public void setYearError(String YearError) {
         this.yearError = YearError;
     }
+
+    @Override
+    public String toString() {
+        return idError + "=" + nameError + "=" + priceError + "=" + CPUError + "=" + RamError + "=" + ScreenError + "=" + GraphicError + "=" + DiskError + "=" + OSError + "=" + WeightError + "=" + RegionError + "=" + yearError;
+    }
     
 }

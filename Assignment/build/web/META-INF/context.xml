@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <Context path="/Assignment">
 
-  <Resource auth="Container" driverClassName="com.microsoft.sqlserver.jdbc.SQLServerDriver" name="DBContext" password="1" type="javax.sql.DataSource" url="jdbc:sqlserver://localhost:1433;databaseName=PRJ301_SE1511_Group01" username="sa"/>
+  <Resource auth="Container" driverClassName="com.microsoft.sqlserver.jdbc.SQLServerDriver" name="DBContext" password="123456" type="javax.sql.DataSource" url="jdbc:sqlserver://localhost:1433;databaseName=PRJ301_SE1511_Group01" username="trungtnc"/>
 
 </Context>

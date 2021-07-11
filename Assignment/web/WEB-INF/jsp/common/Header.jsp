@@ -11,7 +11,7 @@
     <div class="container">
         <div class="mr-auto p-2">
             <a class="navbar-brand" href="/Assignment">
-                Logo
+                <h3 style="font-family: Satisfy, cursive; margin-bottom: 0px;">Welcome</h3>
             </a>
         </div>
 
@@ -60,6 +60,12 @@
                     </c:if>
                     <c:if test="${USER.getRole() eq 3}">
                         <!-- Staff -->
+                        <li>
+                            <a class="nav-link admin-link font-weight-bold" href="EmployeeLoadListServlet">Employee ${USER.name}</a>
+                        </li>
+                        <li>
+                            <a class="nav-link normal-link font-weight-bold" href="EmployeeEditServlet?elid=0">Create new laptop</a>
+                        </li>
                     </c:if>
                     <c:if test="${USER ne null}">
                         <li>

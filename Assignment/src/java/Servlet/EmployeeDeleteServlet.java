@@ -18,8 +18,8 @@ import javax.servlet.http.HttpServletResponse;
  * @author SE140866
  */
 public class EmployeeDeleteServlet extends HttpServlet {
-    private final String LIST = "LoadListServlet";
-    private final String FORM = "ErrPage.jsp";
+    private final String LIST = "EmployeeLoadListServlet";
+    private final String FORM = "Error.jsp";
 
    
     
@@ -32,7 +32,6 @@ public class EmployeeDeleteServlet extends HttpServlet {
         try{
             System.out.println(dlid);
             if(dao.deleteWithID(Integer.parseInt(dlid))){
-                
                 url=LIST;
             }else{
                 url=FORM;

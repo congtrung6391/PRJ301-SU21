@@ -21,8 +21,8 @@ import javax.servlet.http.HttpSession;
  * @author SE140866
  */
 public class EmployeeEditServlet extends HttpServlet {
-    private final String LIST = "LoadListServlet";
-    private final String FORM = "LaptopInformation.jsp";
+    private final String LIST = "EmployeeLoadListServlet";
+    private final String FORM = "/WEB-INF/jsp/employee/EmployeeLaptopInformation.jsp";
     
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
@@ -71,7 +71,7 @@ public class EmployeeEditServlet extends HttpServlet {
             String[] w = dtoErr.toString().split("=");
             for(String i : w){
                 check = i.equals(" ");
-                count++;
+                if (check) count++;
             }
             request.setAttribute("dtoErr", dtoErr);
             
@@ -90,6 +90,7 @@ public class EmployeeEditServlet extends HttpServlet {
         }catch (Exception e) {
             e.printStackTrace();
         }finally{
+            System.out.println(url);
             request.getRequestDispatcher(url).forward(request, response);
         }
     }

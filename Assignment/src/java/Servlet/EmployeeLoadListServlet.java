@@ -40,7 +40,7 @@ public class EmployeeLoadListServlet extends HttpServlet {
         try{
             id = Integer.parseInt(idsearch);            
         }catch(Exception e){
-            e.printStackTrace();
+            id = -1;
         }
         if(namesearch==null){
             namesearch="";
@@ -49,7 +49,7 @@ public class EmployeeLoadListServlet extends HttpServlet {
             dao = new LaptopDAO();
             List<LaptopDTO> listLaptop = dao.getAllLaptop(id, namesearch);
             request.setAttribute("listLaptop", listLaptop);
-            request.getRequestDispatcher("ListLaptopEmp.jsp").forward(request, response);
+            request.getRequestDispatcher("/WEB-INF/jsp/employee/EmployeeListLaptop.jsp").forward(request, response);
         }catch(Exception e){
             e.printStackTrace();
         }
