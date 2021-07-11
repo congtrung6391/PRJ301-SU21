@@ -8,6 +8,7 @@
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <%@taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
+<%@taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <html>
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
@@ -83,7 +84,9 @@
                                             <p class="mb-1">Ram: ${lap.ram}</p>
                                             <p class="mb-1">Screen: ${lap.screen}</p>
                                             <p class="mb-2">Year: ${lap.year}</p>
-                                            <h6 class="font-weight-bold">Price: ${lap.price*100} $</h6>
+                                            <h6 class="font-weight-bold">
+                                                Price: <fmt:formatNumber value="${lap.price}" maxFractionDigits="3"/> $
+                                            </h6>
                                             <div class="row px-3">
                                                 <div class="mr-2">
                                                     <input type="hidden" name="lastname" value="${txtlastname}" />

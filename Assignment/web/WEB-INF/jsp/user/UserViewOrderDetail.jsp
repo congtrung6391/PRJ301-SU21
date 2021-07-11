@@ -6,6 +6,7 @@
 
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
+<%@taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <!DOCTYPE html>
 <html>
    <head>
@@ -60,7 +61,7 @@
                                     ${orderDetails.quantity}
                                 </td>
                                 <td>
-                                    ${orderDetails.laptop.price}
+                                    <fmt:formatNumber value="${orderDetails.laptop.price}" maxFractionDigits="3"/>
                                 </td>
                             </tr>
                             </c:forEach>
@@ -93,7 +94,7 @@
                                     Total Price :
                                 </td>
                                 <td colspan="3">
-                                    ${requestScope.totalprice}
+                                    <fmt:formatNumber value="${requestScope.totalprice}" maxFractionDigits="3"/>
                                 </td>
                             </tr>
                         </tbody>
