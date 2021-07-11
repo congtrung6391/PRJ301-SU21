@@ -63,44 +63,49 @@ public class UserBuyServlet extends HttpServlet {
                 int orderId = -1;
                 if (user != null && cart != null){
                     try {
+                        int error = 0;
                         for (ShoppingCartDTO shoppingCartDTO : cart) {
                             String countStr = request.getParameter("txtquantity"+shoppingCartDTO.getLaptop().getId());
                             
                             if (countStr.trim().isEmpty()) {
-                                request.setAttribute("ErrorQuantity", "Quantity must be number");
-                                url = FAIL;
+                                error ++;
+                                
                             }
-                            int count = Integer.parseInt(countStr);
+                            else {
+                                int count = Integer.parseInt(countStr);
                             
-                            mapCount.put(shoppingCartDTO.getLaptop().getId(), count);
+                                mapCount.put(shoppingCartDTO.getLaptop().getId(), count);
+                            }
+                            
                         }
                         String Address = request.getParameter("txtaddress");
-                        
-                        if (Address.trim().isEmpty()){                          
+                        if (error > 0){
+                            request.setAttribute("Errorquantity", "Quantity must be > 0");
+                            valid = false;
+                        }
+                        if (Address.trim().isEmpty()){    
+                            request.setAttribute("AddressNull", "Please input Address");
                             valid = false;         
                         }
                         float totalPrice = 0;
                         int userId = user.getUserId();
-                        for (ShoppingCartDTO shoppingCartDTO : cart) {
+                        
+                        if (valid == true){
+                            for (ShoppingCartDTO shoppingCartDTO : cart) {
                             int count = mapCount.get(shoppingCartDTO.getLaptop().getId());
                             
                             totalPrice += shoppingCartDTO.getLaptop().getPrice()*count;
                         }
-                        if (valid == true){
                             
                         orderId = checkoutDAO.createOrder(userId, Address, totalPrice);
-                        
+                        request.setAttribute("totalprice", totalPrice);
                         if (orderId != -1 ){
+                            
                             for (ShoppingCartDTO shoppingCartDTO : cart) {
                                 int count = mapCount.get(shoppingCartDTO.getLaptop().getId());
                                 
                                 if (count > 0){
                                     boolean check = checkoutDAO.createOrderDetail(orderId, shoppingCartDTO.getLaptop().getId(), count);
-                                   
-                                }
-                                else {
-                                    request.setAttribute("Errorquantity", "Quantity must be > 0");
-                                    url = FAIL;
                                 }
                             }
                             session.removeAttribute("cart");
@@ -110,14 +115,16 @@ public class UserBuyServlet extends HttpServlet {
                     }
                         else {
                             for (ShoppingCartDTO shoppingCartDTO : cart) {
-                                shoppingCartDTO.setQuantity(mapCount.get(shoppingCartDTO.getLaptop().getId()));
+                                int count = shoppingCartDTO.getQuantity();
+                                totalPrice += shoppingCartDTO.getLaptop().getPrice()*count;
                             }
                             session.setAttribute("cart", cart);
-                            request.setAttribute("AddressNull", "Please input Address");
+                            request.setAttribute("totalprice", totalPrice);
                             url = FAIL;
+                            
                         }
                         
-                        request.setAttribute("totalprice", totalPrice);
+                        
                     } catch (NamingException ex) {
                         log ("UserBuyServlet's Naming Exception: " + ex.getMessage());
                     } catch (SQLException ex) {

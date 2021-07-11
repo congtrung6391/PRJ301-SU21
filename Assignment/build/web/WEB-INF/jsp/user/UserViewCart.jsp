@@ -82,7 +82,10 @@
                                     </td>
                                     <td>
                                         <input type="number" name="txtquantity${lap.laptop.id}" value="${lap.quantity}" />
-                                        ${requestScope.Errorquantity}
+                                        <font color="red">
+                                            ${requestScope.Errorquantity}
+                                        </font>
+                                        
 
                                     </td>
                                     <td>
@@ -108,7 +111,6 @@
 
                     <input type="hidden" name="txttotalprice" value="${requestScope.totalprice}" /> 
                     <font color="red">
-                        ${requestScope.ErrorQuantity}
                         ${requestScope.AddressNull}
                     </font> 
                     <div>

@@ -70,7 +70,7 @@
                     <lable for="txtaddress">Address</lable>
                     <input class="form-control" id="txtaddress" type="text" name="txtaddress" value="${param.txtaddress}" />
                     <font color="red">
-                        ${errorobj.phoneError}
+                        ${errorobj.addressError}
                     </font>
                 </div>
                 <div class="row mt-3 px-3">
