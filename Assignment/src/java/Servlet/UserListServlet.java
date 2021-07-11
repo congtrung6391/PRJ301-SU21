@@ -30,7 +30,7 @@ import javax.servlet.http.HttpSession;
 public class UserListServlet extends HttpServlet {
 
     private final String ERROR_PAGE = "Error.jsp";
-    private final String USER_SEARCH_PAGE = "/WEB-INF/UserPage.jsp";
+    private final String USER_SEARCH_PAGE = "/WEB-INF/jsp/user/UserPage.jsp";
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -47,6 +47,7 @@ public class UserListServlet extends HttpServlet {
         PrintWriter out = response.getWriter();
         String url = ERROR_PAGE;
         String button = request.getParameter("btn");
+        
         try {
             LaptopDAO dao = new LaptopDAO();
             String name = request.getParameter("txtlaptopname");
@@ -54,34 +55,31 @@ public class UserListServlet extends HttpServlet {
             String maxPrice = request.getParameter("txtmaxprice");
             String minYear = request.getParameter("txtminyear");
             String maxyear = request.getParameter("txtmaxyear");
+            
             if ("Search".equals(button)) {
                 int valid = 1 ;
                 HttpSession session = request.getSession();
                 UserDTO dto = (UserDTO) session.getAttribute("USER");
 
                 LaptopError lapError = new LaptopError();
-                if (!minPrice.matches("[0-9]+")  && !minPrice.trim().isEmpty() ) {                    
+                if (!minPrice.isEmpty() && !minPrice.matches("[0-9]+")  && !minPrice.trim().isEmpty() ) {                    
                             valid = 0;
                         lapError.setPriceError("Price must be a number");
-                        System.out.println(minPrice);
                         
                 }
-                if (!minYear.trim().matches("[0-9]+") && !minYear.trim().isEmpty() ) {                  
+                if (!minYear.isEmpty() && !minYear.trim().isEmpty() && !minYear.trim().matches("[0-9]+")) {                  
                             valid = 0;
                         lapError.setYearError("Year must be a number");
-                            System.out.println(minYear);
                         
                 }
-                if (!maxPrice.matches("[0-9]+")  && !maxPrice.trim().isEmpty()) {                    
+                if (!maxPrice.isEmpty() && !maxPrice.matches("[0-9]+")  && !maxPrice.trim().isEmpty()) {                    
                             valid = 0;
                         lapError.setPriceError("Price must be a number");
-                        System.out.println(minPrice);
                         
                 }
-                if ( !maxyear.matches("[0-9]+") && !maxyear.trim().isEmpty()) {                    
+                if (!maxyear.isEmpty() && !maxyear.matches("[0-9]+") && !maxyear.trim().isEmpty()) {                    
                             valid = 0;
                         lapError.setYearError("Year must be a number");
-                        System.out.println(minPrice);
                         
                 }
 //                if (minYear == "" && maxyear == ""){
@@ -91,10 +89,7 @@ public class UserListServlet extends HttpServlet {
 //                    minPrice = "0"; maxPrice = "0";
 //                }
               
-                if (name.trim().isEmpty()) {
-                    valid = 0;
-                    lapError.setNameError("Name is not supposed to be empty");
-                }
+                name = name.trim();
                 
                 if (valid == 1) {
                     if (minPrice.trim().isEmpty()) minPrice="0";
@@ -107,20 +102,19 @@ public class UserListServlet extends HttpServlet {
                     int maxYear1 = Integer.parseInt(maxyear);
                     ArrayList<LaptopDTO> lapList = dao.SearchLaptop(name, minPrice1, maxPrice1, minYear1, maxYear1);
                     request.setAttribute("LapList", lapList);
-                    for (LaptopDTO laptopDTO : lapList) {
-                        System.out.println(laptopDTO.getPrice());
-                    }
                 } else if (valid == 0) {
                     request.setAttribute("ErrorInput", lapError);
                 }
             } else if ("SearchAllLaptop".equals(button)) {
                 ArrayList<LaptopDTO> fullList = dao.getAllLaptop();
                 request.setAttribute("LapList", fullList);
-            }
-            else if (button == null){
+            } else if (button == null){
                 ArrayList<LaptopDTO> fullList = dao.getAllLaptop();
                 request.setAttribute("LapList", fullList);
                 System.out.println("a");
+            } else {
+                ArrayList<LaptopDTO> fullList = dao.getAllLaptop();
+                request.setAttribute("LapList", fullList);
             }
             url = USER_SEARCH_PAGE;
         } catch (NamingException ex) {

@@ -24,7 +24,7 @@ import javax.servlet.http.HttpSession;
 @WebServlet(name = "UserViewCartServlet", urlPatterns = {"/UserViewCartServlet"})
 public class UserViewCartServlet extends HttpServlet {
     private final String ERROR_PAGE = "Error.jsp";
-    private final String VIEW_CART_PAGE = "/WEB-INF/UserViewCart.jsp";
+    private final String VIEW_CART_PAGE = "/WEB-INF/jsp/user/UserViewCart.jsp";
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
      * methods.

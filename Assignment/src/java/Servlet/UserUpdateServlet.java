@@ -28,7 +28,7 @@ import javax.servlet.http.HttpSession;
 @WebServlet(name = "UserUpdateServlet", urlPatterns = {"/UserUpdateServlet"})
 public class UserUpdateServlet extends HttpServlet {
     private final String ERROR_PAGE = "Error.jsp";
-    private final String SUCCESS = "/WEB-INF/UserViewProfile.jsp";
+    private final String SUCCESS = "/WEB-INF/jsp/user/UserViewProfile.jsp";
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
      * methods.
@@ -58,7 +58,6 @@ public class UserUpdateServlet extends HttpServlet {
             if (username.trim().isEmpty()){
                 valid = false;
                 error.setUsernameError("Please input Username");
-                
             }
             if (password.trim().isEmpty()){
                 valid = false;

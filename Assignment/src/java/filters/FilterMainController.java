@@ -6,6 +6,7 @@
 package filters;
 
 import DTO.UserDTO;
+import java.io.File;
 import java.io.IOException;
 import java.io.PrintStream;
 import java.io.PrintWriter;
@@ -133,7 +134,6 @@ public class FilterMainController implements Filter {
                     
                     url = USER_DEFAULT;
                 } else if (!resource.startsWith("User")) {
-
                     url = ERROR_ROLE;
                 }
             } else if (user.getRole() == 3) { // 

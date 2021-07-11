@@ -34,7 +34,7 @@ import javax.servlet.http.HttpSession;
 @WebServlet(name = "UserBuyServlet", urlPatterns = {"/UserBuyServlet"})
 public class UserBuyServlet extends HttpServlet {
     private final String ERROR_PAGE = "Error.jsp";
-    private final String FAIL = "/WEB-INF/UserViewCart.jsp";
+    private final String FAIL = "/WEB-INF/jsp/user/UserViewCart.jsp";
     private final String SUCCESS = "/WEB-INF/UserCheckOutSuccess.html";
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
