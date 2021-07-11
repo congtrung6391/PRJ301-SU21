@@ -91,7 +91,7 @@
                 
                 <form action="UserAddItemToCart">
                     <input type="hidden" value="${dto.id}" name="txtLaptopId" />
-                    <input type="submit" value="Add To Cart" name="btn" />
+                    <input class="btn btn-info" type="submit" value="Add To Cart" name="btn" />
                 </form>
             </div>
         </div>

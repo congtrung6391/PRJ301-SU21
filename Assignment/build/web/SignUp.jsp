@@ -10,65 +10,77 @@
 <html>
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-        <title>Sign Up Page</title>
+        <link 
+            rel="stylesheet" 
+            href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css" 
+            integrity="sha384-9aIt2nRpC12Uk9gS9baDl411NQApFmC26EwAOH8WgZl5MYYxFfc+NcPb1dKGj7Sk" 
+            crossorigin="anonymous"
+        >
+        <link 
+            rel="stylesheet" 
+            href="http://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.4.0/css/font-awesome.min.css"
+        >
+        <link 
+            href="https://fonts.googleapis.com/css?family=Open+Sans:300,400,700" 
+            rel="stylesheet"
+        >
+        <style><%@include file="\WEB-INF\statics\css\style.css"%></style>
+
+        <title>Home Page</title>
     </head>
     <body>
-        <h1>Sign Up A New Account</h1>
-        <font color="red">
-            ${requestScope.SUCCESS}
-        </font>
         
-        <form action="SignUpServlet">    
-        <table>
-            <tr>
-                <td>Username:</td>
-                <td>
-                    <input type="text" name="txtusername" value="${param.txtusername}" />
+        <%@include file="/WEB-INF/jsp/common/Header.jsp" %>
+        
+        <div class="container d-flex justify-content-center">
+            <form class="login-form form-group col-md-5 mt-4 py-3 px-4 border rounded shadow" action="SignUpServlet" method="POST">
+                <h4>Sign Up A New Account</h4>
+                <font color="green">
+                    ${requestScope.SUCCESS}
+                </font>
+                <div class="mt-2">
+                    <lable for="txtusername">Username</lable>
+                    <input class="form-control" id="txtusername" type="text" name="txtusername" value="${param.txtusername}" />
                     <font color="red">
                         ${errorobj.usernameError}
-                    </font>                
-                </td>
-            </tr>
-            <tr>
-                <td>Password:</td>
-                <td>
-                    <input type="password" name="txtpassword" value="" />
+                    </font>
+                </div>
+                <div class="mt-2">
+                    <lable for="txtpassword">Password</lable>
+                    <input class="form-control" id="txtpassword" type="password" name="txtpassword" value="${param.txtpassword}" />
                     <font color="red">
                         ${errorobj.passwordError}
-                    </font>                 
-                </td>
-            </tr>
-            <tr>
-                <td>Name:</td>
-                <td>
-                    <input type="text" name="txtname" value="${param.txtname}" />
+                    </font> 
+                </div>
+                <div class="mt-2">
+                    <lable for="txtname">Username</lable>
+                    <input class="form-control" id="txtname" type="text" name="txtname" value="${param.txtname}" />
                     <font color="red">
                         ${errorobj.nameError}
-                    </font>                    
-                </td>
-            </tr>
-            <tr>
-                <td>Phone:</td>
-                <td>
-                    <input type="number" name="txtphone" value="${param.txtphone}" />                    
+                    </font>
+                </div>
+                <div class="mt-2">
+                    <lable for="txtphone">Username</lable>
+                    <input class="form-control" id="txtphone" type="text" name="txtphone" value="${param.txtphone}" />
                     <font color="red">
                         ${errorobj.phoneError}
                     </font>
-                </td>
-            </tr>
-            <tr>
-                <td>Address:</td>
-                <td>
-                    <input type="text" name="txtaddress" value="${param.txtaddress}" />              
+                </div>
+                <div class="mt-2">
+                    <lable for="txtaddress">Username</lable>
+                    <input class="form-control" id="txtaddress" type="text" name="txtaddress" value="${param.txtaddress}" />
                     <font color="red">
-                        ${errorobj.addressError}
+                        ${errorobj.phoneError}
                     </font>
-                </td>
-            </tr>
-        </table>
-                <input type="submit" value="Sign Up" name="btn" /><br/>
-                <input type="reset" value="Reset" />
-        </form>
-                    <a href="Login.jsp">Click here to return Login Page</a>
+                </div>
+                <div class="row mt-3 px-3">
+                    <button type="submit"  value="Sign Up" name="btn" class="btn btn-success mr-2">Sign up</button>
+                    <button type="reset" class="btn btn-warning">Reset</button>
+                </div>
+                <div class="row mt-3 px-3">
+                    <a href="Login.jsp">Login to an existed account</a>
+                </div>
+            </form>
+        </div>
     </body>
 </html>

@@ -62,7 +62,7 @@ public class CheckoutDAO {
         Connection con = null;
         PreparedStatement ps = null;
         ResultSet rs = null;
-        String sql = "insert into OrderDetail "
+        String sql = "insert into OrderDetail(orderId, quantity, laptopid) "
                 + "values (?,?,?)";
         try {
             con = DBHelper.makeConnection();
@@ -174,7 +174,7 @@ public class CheckoutDAO {
         ResultSet rs = null;
         ArrayList<OrderDetailDTO> list = null;
         LaptopDAO lapdao = new LaptopDAO();
-        String sql = "select CartDetailID,OrderID,Quantity,LaptopID "
+        String sql = "select OrderDetailID, OrderID, Quantity, LaptopID "
                 + "from OrderDetail "
                 + "where OrderID = ?";
         try {
@@ -185,7 +185,7 @@ public class CheckoutDAO {
                 ps.setInt(1,orderId);
                 rs = ps.executeQuery();
                 while (rs.next()){
-                    int cartDetailId = rs.getInt("CartDetailID");
+                    int cartDetailId = rs.getInt("OrderDetailID");
                     OrderDTO order = getOrderByOrderId(orderId);
                     int quantity = rs.getInt("Quantity");
                     int laptopId = rs.getInt("LaptopID");
