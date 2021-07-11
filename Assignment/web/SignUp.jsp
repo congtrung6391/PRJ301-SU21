@@ -24,6 +24,7 @@
             href="https://fonts.googleapis.com/css?family=Open+Sans:300,400,700" 
             rel="stylesheet"
         >
+        <link href="https://fonts.googleapis.com/css2?family=Dancing+Script:wght@500&family=Satisfy&display=swap" rel="stylesheet">
         <style><%@include file="\WEB-INF\statics\css\style.css"%></style>
 
         <title>Home Page</title>
