@@ -121,7 +121,7 @@ public class FilterMainController implements Filter {
         if (!resource.startsWith("Error") && !resource.startsWith("SignOut") && !resource.startsWith("SignUp") ) {
 
             if (user == null) {
-                if (resource.length() > 0 && !resource.startsWith("Login") ) {
+                if (resource.length() > 0 && !resource.startsWith("Login") && !resource.startsWith("SignUp")) {
                     request.setAttribute("NotLogin", "You have to Login first");
                     url = LOGIN_PAGE;
                 } else if (resource.length() == 0) {

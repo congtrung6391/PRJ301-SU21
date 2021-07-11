@@ -29,7 +29,7 @@ import javax.servlet.http.HttpSession;
 @WebServlet(name = "UserViewOrderServlet", urlPatterns = {"/UserViewOrderServlet"})
 public class UserViewOrderServlet extends HttpServlet {
     private final String ERROR_PAGE = "Error.jsp";
-    private final String VIEW_ORDER_PAGE = "/WEB-INF/UserViewHistoryOrder.jsp";
+    private final String VIEW_ORDER_PAGE = "/WEB-INF/jsp/user/UserViewHistoryOrder.jsp";
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
      * methods.

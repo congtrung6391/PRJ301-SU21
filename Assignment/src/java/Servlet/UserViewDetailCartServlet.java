@@ -30,7 +30,7 @@ import javax.servlet.http.HttpSession;
 @WebServlet(name = "UserViewDetailCartServlet", urlPatterns = {"/UserViewDetailCartServlet"})
 public class UserViewDetailCartServlet extends HttpServlet {
     private final String ERROR_PAGE = "Error.jsp";
-    private final String SUCCESS = "/WEB-INF/UserViewOrderDetail.jsp";
+    private final String SUCCESS = "/WEB-INF/jsp/user/UserViewOrderDetail.jsp";
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
      * methods.

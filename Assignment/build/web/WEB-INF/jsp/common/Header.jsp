@@ -19,10 +19,10 @@
                 <ul class="nav justify-content-between list-unstyled">
                     <c:if test="${USER eq null}">
                         <li>
-                            <a class="nav-link normal-link font-weight-bold" href="/Login">Login</a>
+                            <a class="nav-link normal-link font-weight-bold" href="Login.jsp">Login</a>
                         </li>
                         <li>
-                            <a class="nav-link normal-link font-weight-bold" href="/SignUp">Register</a>
+                            <a class="nav-link normal-link font-weight-bold" href="SignUp.jsp">Register</a>
                         </li>
                     </c:if>
                     <c:if test="${USER.getRole() eq 1}">
@@ -40,7 +40,7 @@
                             <a class="nav-link normal-link font-weight-bold" href="UserListServlet">Home</a>
                         </li>
                         <li>
-                            <a class="nav-link normal-link font-weight-bold" href="">Your order</a>
+                            <a class="nav-link normal-link font-weight-bold" href="UserViewOrderServlet">Your order</a>
                         </li>
                         <li>
                             <form action="UserViewCartServlet" >
