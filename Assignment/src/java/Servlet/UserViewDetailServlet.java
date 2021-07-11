@@ -26,7 +26,7 @@ import javax.servlet.http.HttpServletResponse;
 @WebServlet(name = "UserViewDetailServlet", urlPatterns = {"/UserViewDetailServlet"})
 public class UserViewDetailServlet extends HttpServlet {
     private final String ERROR_PAGE = "Error.jsp";
-    private final String VIEW_DETAIL_PAGE = "/WEB-INF/UserViewDetail.jsp";
+    private final String VIEW_DETAIL_PAGE = "/WEB-INF/jsp/user/UserViewDetail.jsp";
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
      * methods.
@@ -48,17 +48,22 @@ public class UserViewDetailServlet extends HttpServlet {
             String maxPrice = request.getParameter("txtlastmaxprice");
             String minYear = request.getParameter("txtlastminyear");
             String maxYear = request.getParameter("txtlastmaxyear");
+            String button = request.getParameter("btn");
+            System.out.println(button);
             LaptopDAO dao = new LaptopDAO();
             LaptopDTO dto = dao.getLaptopById(id);
-            System.out.println(name);
+            
             if (dto != null) {
+                
                 request.setAttribute("Laptop", dto);
-                url = VIEW_DETAIL_PAGE;
                 request.setAttribute("lastSearchName", name);
                 request.setAttribute("lastSearchMinPrice", minPrice);
                 request.setAttribute("lastSearchMaxPrice", maxPrice);
                 request.setAttribute("lastSearchMinYear", minYear);
                 request.setAttribute("lastSearchMaxYear", maxYear);
+                request.setAttribute("btn", button);
+                url = VIEW_DETAIL_PAGE;
+                
             }
         }
         catch (NamingException ex) {

@@ -2,7 +2,8 @@
     color: rgb(255, 204, 0);
     border: 1px solid rgb(255, 204, 0);
     border-radius: 2rem;
-
+    margin-left: 0.5ren;
+    margin-right: 0.3rem;
 }
 
 .admin-link:hover {
@@ -17,11 +18,15 @@
 body {
     font-family: 'Open Sans', sans-serif;
     color: #2C3E50; 
+    min-height: 100vh;
 }
 img {
     border-radius: 5px;
     width: 100%;
     object-fit: cover;
+}
+
+.login-form {
 }
 
 .shadow-div {
@@ -37,6 +42,8 @@ img {
     font-family: 'Open Sans', sans-serif;
     color: #2C3E50;
     margin-left: 0.5rem;
+    border: none;
+    background: none;
 }
 .normal-link:hover {
     background: rgb(230, 230, 230);

@@ -6,6 +6,7 @@
 package filters;
 
 import DTO.UserDTO;
+import java.io.File;
 import java.io.IOException;
 import java.io.PrintStream;
 import java.io.PrintWriter;
@@ -27,7 +28,7 @@ public class FilterMainController implements Filter {
 
     private static final String LOGIN_PAGE = "Login.jsp";
     private static final String ERROR_ROLE = "/WEB-INF/ErrorRole.jsp";
-    private static final String USER_DEFAULT = "/WEB-INF/UserPage.jsp";
+    private static final String USER_DEFAULT = "UserListServlet";
     private static final String EMPLOYEE_DEFAULT = "EmployeeListServlet";
     private static final String ADMIN_DEFAULT = "AdminListServlet";
 
@@ -117,10 +118,10 @@ public class FilterMainController implements Filter {
 
         String url = null;
 
-        if (!resource.startsWith("Error") && !resource.startsWith("SignOut")) {
+        if (!resource.startsWith("Error") && !resource.startsWith("SignOut") && !resource.startsWith("SignUp") ) {
 
             if (user == null) {
-                if (resource.length() > 0 && !resource.startsWith("Login")) {
+                if (resource.length() > 0 && !resource.startsWith("Login") && !resource.startsWith("SignUp")) {
                     request.setAttribute("NotLogin", "You have to Login first");
                     url = LOGIN_PAGE;
                 } else if (resource.length() == 0) {
@@ -130,9 +131,9 @@ public class FilterMainController implements Filter {
             } else if (user.getRole() == 2) { // 
 
                 if (resource.length() == 0 || resource.startsWith("Login")) {
+                    
                     url = USER_DEFAULT;
                 } else if (!resource.startsWith("User")) {
-
                     url = ERROR_ROLE;
                 }
             } else if (user.getRole() == 3) { // 

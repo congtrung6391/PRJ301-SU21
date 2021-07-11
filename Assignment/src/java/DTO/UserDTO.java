@@ -17,8 +17,8 @@ public class UserDTO implements Serializable{
     private String password ;
     private int role ;
     private String name ;
-    private String Phone;
-    private String Address;
+    private String phone;
+    private String address;
 
     public UserDTO() {
     }
@@ -29,8 +29,8 @@ public class UserDTO implements Serializable{
         this.password = password;
         this.role = role;
         this.name = name;
-        this.Phone = Phone;
-        this.Address = Address;
+        this.phone = Phone;
+        this.address = Address;
     }
 
     public int getUserId() {
@@ -74,19 +74,19 @@ public class UserDTO implements Serializable{
     }
 
     public String getPhone() {
-        return Phone;
+        return phone;
     }
 
     public void setPhone(String Phone) {
-        this.Phone = Phone;
+        this.phone = Phone;
     }
 
     public String getAddress() {
-        return Address;
+        return address;
     }
 
     public void setAddress(String Address) {
-        this.Address = Address;
+        this.address = Address;
     }
     
 }

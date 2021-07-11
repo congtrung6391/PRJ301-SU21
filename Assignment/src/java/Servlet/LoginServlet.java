@@ -30,7 +30,7 @@ public class LoginServlet extends HttpServlet {
     private final String LOGIN_ADMIN_SUCCESS = "/WEB-INF/jsp/AdminList.jsp";
     private final String LOGIN_PAGE = "Login.jsp";
     private final String LOGIN_USER_SUCCESS = "/WEB-INF/UserPage.jsp";
-    private final String LOGIN_FAIL = "/WEB-INF/error.jsp";
+    private final String LOGIN_FAIL = "/WEB-INF/Error.jsp";
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
      * methods.
