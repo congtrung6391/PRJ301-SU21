@@ -29,7 +29,7 @@ public class FilterMainController implements Filter {
     private static final String LOGIN_PAGE = "Login.jsp";
     private static final String ERROR_ROLE = "/WEB-INF/ErrorRole.jsp";
     private static final String USER_DEFAULT = "UserListServlet";
-    private static final String EMPLOYEE_DEFAULT = "EmployeeListServlet";
+    private static final String EMPLOYEE_DEFAULT = "EmployeeLoadListServlet";
     private static final String ADMIN_DEFAULT = "AdminListServlet";
 
     private static final boolean debug = true;
@@ -128,15 +128,14 @@ public class FilterMainController implements Filter {
                     url = LOGIN_PAGE;
                 }
 
-            } else if (user.getRole() == 2) { // 
+            } else if (user.getRole() == 3) { // 
 
                 if (resource.length() == 0 || resource.startsWith("Login")) {
-                    
                     url = USER_DEFAULT;
                 } else if (!resource.startsWith("User")) {
                     url = ERROR_ROLE;
                 }
-            } else if (user.getRole() == 3) { // 
+            } else if (user.getRole() == 2) { // 
                 if (resource.length() == 0 || resource.startsWith("Login")) {
                     url = EMPLOYEE_DEFAULT;
                 } else if (!resource.startsWith("Employee")) {

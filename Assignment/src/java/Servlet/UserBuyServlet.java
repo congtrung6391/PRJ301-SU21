@@ -68,8 +68,7 @@ public class UserBuyServlet extends HttpServlet {
                             String countStr = request.getParameter("txtquantity"+shoppingCartDTO.getLaptop().getId());
                             
                             if (countStr.trim().isEmpty()) {
-                                error ++;
-                                
+                                error ++ ;
                             }
                             else {
                                 int count = Integer.parseInt(countStr);
@@ -78,35 +77,39 @@ public class UserBuyServlet extends HttpServlet {
                             }
                             
                         }
+                        float totalPrice = 0;
+                        for (ShoppingCartDTO shoppingCartDTO : cart) {
+                            if (error == 0){
+                                int count = mapCount.get(shoppingCartDTO.getLaptop().getId());
+                                totalPrice += shoppingCartDTO.getLaptop().getPrice()*count;
+                                shoppingCartDTO.setQuantity(count);
+                            }
+                        }
                         String Address = request.getParameter("txtaddress");
                         if (error > 0){
-                            request.setAttribute("Errorquantity", "Quantity must be > 0");
+                            request.setAttribute("Errorquantity", "quantity must be > 0");
                             valid = false;
                         }
-                        if (Address.trim().isEmpty()){    
+                        if (Address.trim().isEmpty()){
                             request.setAttribute("AddressNull", "Please input Address");
                             valid = false;         
                         }
-                        float totalPrice = 0;
+                        
                         int userId = user.getUserId();
                         
                         if (valid == true){
-                            for (ShoppingCartDTO shoppingCartDTO : cart) {
-                            int count = mapCount.get(shoppingCartDTO.getLaptop().getId());
-                            
-                            totalPrice += shoppingCartDTO.getLaptop().getPrice()*count;
-                        }
                             
                         orderId = checkoutDAO.createOrder(userId, Address, totalPrice);
                         request.setAttribute("totalprice", totalPrice);
                         if (orderId != -1 ){
-                            
                             for (ShoppingCartDTO shoppingCartDTO : cart) {
                                 int count = mapCount.get(shoppingCartDTO.getLaptop().getId());
                                 
                                 if (count > 0){
                                     boolean check = checkoutDAO.createOrderDetail(orderId, shoppingCartDTO.getLaptop().getId(), count);
+                                   
                                 }
+                                
                             }
                             session.removeAttribute("cart");
                             url = SUCCESS;
@@ -114,14 +117,20 @@ public class UserBuyServlet extends HttpServlet {
                         }
                     }
                         else {
-                            for (ShoppingCartDTO shoppingCartDTO : cart) {
+                            if (error == 0){
+                                request.setAttribute("totalprice", totalPrice);
+                            }
+                            else {
+                                for (ShoppingCartDTO shoppingCartDTO : cart) {
                                 int count = shoppingCartDTO.getQuantity();
                                 totalPrice += shoppingCartDTO.getLaptop().getPrice()*count;
+                                }
+                                request.setAttribute("totalprice", totalPrice);
                             }
-                            session.setAttribute("cart", cart);
-                            request.setAttribute("totalprice", totalPrice);
-                            url = FAIL;
                             
+                            session.setAttribute("cart", cart);
+                            
+                            url = FAIL;
                         }
                         
                         

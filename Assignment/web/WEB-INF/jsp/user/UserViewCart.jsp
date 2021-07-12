@@ -26,6 +26,7 @@
             integrity="sha512-iBBXm8fW90+nuLcSKlbmrPcLa0OT92xO1BIsZ+ywDWZCvqsWgccV3gFoRBv0z+8dLJgyAHIhR35VZc2oM/gI1w=="
             crossorigin="anonymous" referrerpolicy="no-referrer"
         >
+        <link href="https://fonts.googleapis.com/css2?family=Dancing+Script:wght@500&family=Satisfy&display=swap" rel="stylesheet">
         <style><%@include file="\WEB-INF\statics\css\style.css"%></style>
         <title>User Page</title>
     </head>
@@ -82,9 +83,6 @@
                                     </td>
                                     <td>
                                         <input type="number" name="txtquantity${lap.laptop.id}" value="${lap.quantity}" />
-                                        <font color="red">
-                                            ${requestScope.Errorquantity}
-                                        </font>
                                         
 
                                     </td>
@@ -111,8 +109,12 @@
 
                     <input type="hidden" name="txttotalprice" value="${requestScope.totalprice}" /> 
                     <font color="red">
-                        ${requestScope.AddressNull}
-                    </font> 
+                        ${requestScope.AddressNull}<br/>
+                        ${requestScope.Errorquantity}<br/>
+                    </font>
+                    <font color="red">
+                        
+                    </font>
                     <div>
                         <label for="txtaddress">Address: </label>
                         <input class="form-control" id="txtaddress" type="text" name="txtaddress" value="" />

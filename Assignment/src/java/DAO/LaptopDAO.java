@@ -21,6 +21,14 @@ import javax.naming.NamingException;
  * @author khang
  */
 public class LaptopDAO {
+    private List<LaptopDTO> list = null;
+    private String sql = "";
+    private Connection con = null;
+    private PreparedStatement pstm = null;
+    private ResultSet rs = null;
+    private LaptopDTO dto = null;
+    boolean check = false;
+    
     public ArrayList<LaptopDTO> SearchLaptop (String name , float minPrice, float maxPrice, int minYear, int maxYear) throws NamingException, SQLException{
         Connection con = null ;
         PreparedStatement ps = null;
@@ -246,5 +254,257 @@ public class LaptopDAO {
             }
         }
         return -1;
+    }
+    public void closeConnection() throws SQLException{
+        if(con != null)con.close();
+        if(pstm != null)pstm.close();
+        if(rs != null)rs.close();
+    }
+    
+    public List<LaptopDTO> getAllLaptop(int ID) throws Exception{
+        if(ID == 0){
+            sql = "select * from Laptop";
+        }else{
+            sql = "select * from Laptop where LaptopID = " + ID;
+        }
+        try{
+            con = DBHelper.makeConnection();
+            pstm = con.prepareStatement(sql);
+            rs = pstm.executeQuery();
+            list = new ArrayList<>();
+            while(rs.next()){
+                dto = new LaptopDTO();
+                dto.setId(rs.getInt(1));
+                dto.setPrice(rs.getFloat(2));
+                dto.setName(rs.getString(3));
+                dto.setCPU(rs.getString(4));
+                dto.setRam(rs.getString(5));
+                dto.setScreen(rs.getString(6));
+                dto.setGraphic(rs.getString(7));
+                dto.setDisk(rs.getString(8));
+                dto.setoS(rs.getString(9));
+                dto.setWeight(rs.getFloat(10));
+                dto.setRegion(rs.getString(11));
+                dto.setYear(rs.getInt(12));
+                list.add(dto);
+            }
+        }finally{
+            closeConnection();
+        }
+        return list;
+    }
+    public LaptopDTO getLaptopByID(int ID){
+        String sql = "select * from Laptop where LaptopID = "+ID;
+        try{
+            con = DBHelper.makeConnection();
+            pstm = con.prepareStatement(sql);
+            rs = pstm.executeQuery();
+            LaptopDTO dto= new LaptopDTO();
+            dto.setId(rs.getInt(1));
+            dto.setPrice(rs.getFloat(2));
+            dto.setName(rs.getString(3));
+            dto.setCPU(rs.getString(4));
+            dto.setRam(rs.getString(5));
+            dto.setScreen(rs.getString(6));
+            dto.setGraphic(rs.getString(7));
+            dto.setDisk(rs.getString(8));
+            dto.setoS(rs.getString(9));
+            dto.setWeight(rs.getFloat(10));
+            dto.setRegion(rs.getString(11));
+            dto.setYear(rs.getInt(12));
+        }catch(Exception e){
+            e.printStackTrace();
+        }
+        return dto;
+    }
+    
+    public boolean create(LaptopDTO dto) throws Exception{
+        sql = "insert into Laptop values ("
+                + dto.getPrice() +", '"
+                + dto.getName() +"', '"
+                + dto.getCPU()+"', '"
+                + dto.getRam() +"', '"
+                + dto.getScreen() +"', '"
+                + dto.getGraphic() +"', '"
+                + dto.getDisk() +"', '"
+                + dto.getoS()+"', "
+                + dto.getWeight() +", '"
+                + dto.getRegion() +"', "
+                + dto.getYear() +")";
+        try{
+            con = DBHelper.makeConnection();
+            pstm = con.prepareStatement(sql);
+            check = pstm.executeUpdate() != 0;
+        }finally{
+            closeConnection();
+        }
+        return check;
+    }
+    
+    public boolean updateWithID(LaptopDTO dto) throws Exception{
+        sql = "update Laptop set Price = "
+                + dto.getPrice() +", Name = '"
+                + dto.getName() +"', CPU = '"
+                + dto.getCPU()+"', Ram = '"
+                + dto.getRam() +"', Screen = '"
+                + dto.getScreen() +"', Graphic = '"
+                + dto.getGraphic() +"', Disk = '"
+                + dto.getDisk() +"', OS = '"
+                + dto.getoS()+"', Weight = "
+                + dto.getWeight() +", Region = '"
+                + dto.getRegion() +"', Year = "
+                + dto.getYear() +" where LaptopID = "
+                + dto.getId() +"";
+        try{
+            con = DBHelper.makeConnection();
+            pstm = con.prepareStatement(sql);
+            check = pstm.executeUpdate() != 0;
+        }finally{
+            closeConnection();
+        }
+        return check;
+    }
+    
+    public boolean deleteWithID(int ID) throws Exception{
+        sql = "delete from Laptop where LaptopID = "
+                + ID +";";
+        try{
+            con = DBHelper.makeConnection();
+            pstm = con.prepareStatement(sql);
+            check = pstm.executeUpdate() != 0;
+        }finally{
+            closeConnection();
+        }
+        return check;
+    }
+    
+    public String checkName(String name){
+        String text = name.trim();
+        if(text.isEmpty())return"Name is not empty";
+        return " ";
+    }
+    
+    public String checkPrice(String price){
+        String text = price.trim();
+        if(text.isEmpty())return"Price is not empty";        
+        try {            
+            Float.parseFloat(price);
+        } catch (Exception e) {
+            return"Price must be number";
+        }
+        return " ";
+    }
+    
+    public String checkCpu(String cpu){
+        String text = cpu.trim().toLowerCase();
+        if(text.isEmpty())return"CPU is not empty";
+        return " ";
+    }
+    
+    public String checkRam(String ram){
+        String text = ram.trim();
+        if(text.isEmpty())return "Ram is not empty";
+        return " ";
+    }
+    
+    public String checkScreen(String screen){
+        String text = screen.trim();
+        if(text.isEmpty())return "Screen is not empty";
+        return " ";
+    }
+    
+    public String checkGraphic(String graphic){
+        String text = graphic.trim();
+        if(text.isEmpty())return "Graphics is not empty";
+        return " ";
+    }
+    
+    public String checkDisk(String disk){
+        String text = disk.trim();
+        if(text.isEmpty())return"Disk is not empty";
+        return " ";
+    }
+    
+    public String checkOs(String os){
+        String text = os.trim();
+        if(text.isEmpty())return"OS is not empty";
+        return " ";
+    }
+    
+    public String checkWeight(String weight){
+        String text = weight.trim();
+        if(text.isEmpty())return"Weight is not empty";        
+        try {            
+            Float.parseFloat(weight);
+        } catch (Exception e) {
+            return"Weight must be number";
+        }
+        return " ";
+    }
+    
+    public String checkRegion(String region){
+        String text = region.trim();
+        if(text.isEmpty())return"Region is not empty";
+        return " ";
+    }
+    
+    public String checkYear(String year){
+        String text = year.trim();
+        if(text.isEmpty())return"Year is not empty";        
+        try {            
+            Integer.parseInt(year);
+        } catch (Exception e) {
+            return"Year must be number";
+        }
+        return " ";
+    }
+    
+    public String checkID(String id){
+        return " ";
+    }
+    
+    public String checkDto(String dto){
+        String[] s = dto.split("=");
+        return checkID("") + "=" + checkName(s[1]) + "=" + checkPrice(s[2]) + "=" +
+                checkCpu(s[3]) + "=" + checkRam(s[4]) + "=" + checkScreen(s[5]) + "=" +
+                checkGraphic(s[6]) + "=" + checkDisk(s[7]) + "=" + checkOs(s[8]) + "=" +
+                checkWeight(s[9]) + "=" + checkRegion(s[10]) + "=" + checkYear(s[11]);
+    }
+    //public checkValid
+
+    public List<LaptopDTO> getAllLaptop(int idsearch, String namesearch) throws Exception {
+            sql = "select * from laptop where Name like ? ";
+            if(idsearch != -1){
+                sql = sql + "and LaptopID = ?";
+            }
+            try{
+                con = DBHelper.makeConnection();
+                pstm = con.prepareStatement(sql);
+                pstm.setString(1, "%" + namesearch + "%");
+                if(idsearch != -1){
+                    pstm.setInt(2, idsearch);
+                }
+                rs = pstm.executeQuery();
+                list = new ArrayList<>();
+                while(rs.next()){
+                    dto = new LaptopDTO();
+                    dto.setId(rs.getInt(1));
+                    dto.setPrice(rs.getFloat(2));
+                    dto.setName(rs.getString(3));
+                    dto.setCPU(rs.getString(4));
+                    dto.setRam(rs.getString(5));
+                    dto.setScreen(rs.getString(6));
+                    dto.setGraphic(rs.getString(7));
+                    dto.setDisk(rs.getString(8));
+                    dto.setoS(rs.getString(9));
+                    dto.setWeight(rs.getFloat(10));
+                    dto.setRegion(rs.getString(11));
+                    dto.setYear(rs.getInt(12));
+                    list.add(dto);
+                }
+            }finally{
+                closeConnection();
+            }
+            return list;       
     }
 }

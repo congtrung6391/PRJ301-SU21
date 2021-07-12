@@ -5,66 +5,40 @@
  */
 package Servlet;
 
-import DAO.CheckoutDAO;
-import DTO.OrderDTO;
-import DTO.OrderDetailDTO;
-import DTO.UserDTO;
+import DAO.LaptopDAO;
 import java.io.IOException;
 import java.io.PrintWriter;
-import java.sql.SQLException;
-import java.util.ArrayList;
-import java.util.logging.Level;
-import java.util.logging.Logger;
-import javax.naming.NamingException;
 import javax.servlet.ServletException;
-import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import javax.servlet.http.HttpSession;
 
 /**
  *
- * @author khang
+ * @author SE140866
  */
-@WebServlet(name = "UserViewDetailOrderServlet", urlPatterns = {"/UserViewDetailOrderServlet"})
-public class UserViewDetailOrderServlet extends HttpServlet {
-    private final String ERROR_PAGE = "Error.jsp";
-    private final String SUCCESS = "/WEB-INF/jsp/user/UserViewOrderDetail.jsp";
-    /**
-     * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
-     * methods.
-     *
-     * @param request servlet request
-     * @param response servlet response
-     * @throws ServletException if a servlet-specific error occurs
-     * @throws IOException if an I/O error occurs
-     */
+public class EmployeeDeleteServlet extends HttpServlet {
+    private final String LIST = "EmployeeLoadListServlet";
+    private final String FORM = "Error.jsp";
+
+   
+    
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
-        String url = ERROR_PAGE;
-        HttpSession session = request.getSession();
-        try  {
-            UserDTO user = (UserDTO) session.getAttribute("USER");
-            int userId = user.getUserId();
-            int orderId = Integer.parseInt(request.getParameter("id"));
-            CheckoutDAO dao = new CheckoutDAO();
-            ArrayList<OrderDetailDTO> list = dao.getOrderDetailById(orderId, userId);
-            OrderDTO order = dao.getOrderByOrderId(orderId);
-            float totalprice = order.getTotalprice();
-            if (list != null){
-                request.setAttribute("OrderDetailList", list);
-                request.setAttribute("totalprice", totalprice);
-                url = SUCCESS;
+        String dlid = request.getParameter("dlid");
+        String url = "";
+        LaptopDAO dao = new LaptopDAO();
+        try{
+            System.out.println(dlid);
+            if(dao.deleteWithID(Integer.parseInt(dlid))){
+                url=LIST;
+            }else{
+                url=FORM;
             }
-        }
-        catch (NamingException ex) {
-            log ("UserViewDetailCartServlet's Naming Exception: " + ex.getMessage());
-        } catch (SQLException ex) {
-            log ("UserViewDetailCartServlet's SQL Exception: " + ex.getMessage());
-        }        
-        finally{
+        }catch(Exception e){
+            e.printStackTrace();
+        }finally{
             request.getRequestDispatcher(url).forward(request, response);
         }
     }

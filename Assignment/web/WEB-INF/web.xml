@@ -27,6 +27,18 @@
         <servlet-class>Servlet.AdminUpdateServlet</servlet-class>
     </servlet>
     <servlet>
+        <servlet-name>EmployeeLoadListServlet</servlet-name>
+        <servlet-class>Servlet.EmployeeLoadListServlet</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>EmployeeEditServlet</servlet-name>
+        <servlet-class>Servlet.EmployeeEditServlet</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>EmployeeDeleteServlet</servlet-name>
+        <servlet-class>Servlet.EmployeeDeleteServlet</servlet-class>
+    </servlet>
+    <servlet>
         <servlet-name>AdminDeleteServlet</servlet-name>
         <servlet-class>Servlet.AdminDeleteServlet</servlet-class>
     </servlet>
@@ -49,6 +61,18 @@
     <servlet-mapping>
         <servlet-name>AdminDeleteServlet</servlet-name>
         <url-pattern>/AdminDeleteServlet</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>EmployeeLoadListServlet</servlet-name>
+        <url-pattern>/EmployeeLoadListServlet</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>EmployeeEditServlet</servlet-name>
+        <url-pattern>/EmployeeEditServlet</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>EmployeeDeleteServlet</servlet-name>
+        <url-pattern>/EmployeeDeleteServlet</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>
