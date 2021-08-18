@@ -1,5 +1,7 @@
 # PRJ301-SU21
+
 *Semster: Summer* 2021
+
 *Project name:* Laptop Online Shopping
 
 *Main function:*
